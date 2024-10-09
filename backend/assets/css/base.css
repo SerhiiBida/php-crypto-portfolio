@@ -1,0 +1,45 @@
+/* Подключение шрифтов */
+@font-face {
+    font-family: "Uni Neue";
+    src: url("../fonts/UniNeueRegular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Uni Neue";
+    src: url("../fonts/UniNeueBold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Обнуление */
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: normal;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: "Uni Neue", serif;
+    font-weight: 400;
+    font-style: normal;
+    /*font-size: 16px;*/
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
