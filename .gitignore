@@ -1,2 +1,3 @@
 /.idea/
 docker/.env
+/backend/database/test.sql

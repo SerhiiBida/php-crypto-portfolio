@@ -1,3 +1,6 @@
+<?php
+include 'pages/base.php'
+?>
 <!doctype html>
 <html lang="en">
 <head>
