@@ -1,21 +1,20 @@
 <?php
 require 'settings.php';
+// HEAD
 require 'layouts/head.php';
-require 'layouts/header.php';
-require 'layouts/menu.php';
-require 'layouts/footer.php';
 ?>
-
-<!--HEAD-->
-<?php includeHead(); ?>
 
 <body>
 <!--Заголовок-->
-<?php includeHeader(); ?>
+<?php
+require 'layouts/header.php';
+?>
 
 <main class="main">
     <!--Меню-->
-    <?php includeMenu(); ?>
+    <?php
+    require 'layouts/menu.php';
+    ?>
 
     <section class="welcome">
         <h1 class="welcome-title">
@@ -25,5 +24,7 @@ require 'layouts/footer.php';
 </main>
 
 <!--Подвал-->
-<?php includeFooter(); ?>
+<?php
+require 'layouts/footer.php';
+?>
 </body>

@@ -1,4 +1,5 @@
 @import "base.css";
+@import "general.css";
 
 body {
     display: flex;
@@ -48,9 +49,27 @@ body {
 }
 
 .menu {
+    display: none;
     width: 256px;
     border-right: 1px solid rgba(0, 0, 0, 0.12);
-    background-color: rgba(255, 255, 255);
+    background-color: rgba(253, 253, 253);
+}
+
+.menu .menu-item {
+    display: flex;
+    align-items: center;
+    min-height: 20px;
+    padding: 15px 15px;
+    font-size: 0.8rem;
+    gap: 16px;
+}
+
+.menu .menu-item:hover {
+    background-color: #dddbd8;
+}
+
+.menu-mobile-background {
+    display: none;
 }
 
 /*Контент страниц*/

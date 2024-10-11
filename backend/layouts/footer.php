@@ -1,9 +1,2 @@
-<?php
-// Подвал
-function includeFooter(): void
-{
-    echo '<footer class="footer">
-            
-        </footer>
-        <script src="../assets/js/main.js"></script>';
-}
+<!--Подвал-->
+<script src="../assets/js/main.js"></script>

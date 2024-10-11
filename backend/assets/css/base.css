@@ -28,6 +28,11 @@
     font-weight: normal;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 html,
 body {
     height: 100%;
