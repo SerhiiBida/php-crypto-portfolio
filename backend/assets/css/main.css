@@ -76,13 +76,91 @@ body {
 .main > section {
     flex: 1 1 auto;
     height: 100%;
-    background-color: rgba(249, 249, 249);
+    background-color: var(--main-background-color)
 }
 
 /*Главная страница*/
 .welcome {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     max-height: 1080px;
+}
+
+.welcome-img img {
+    max-width: 300px;
+}
+
+.welcome-title {
+    margin-bottom: 8px;
+    font-size: 2.125rem;
+    line-height: 1.175;
+    letter-spacing: 0.0073529412em;
+    font-weight: 700;
+    font-family: "Roboto", sans-serif;
+}
+
+.welcome-text {
+    margin-bottom: 12px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.0125em;
+    font-family: "Roboto", sans-serif;
+}
+
+/*Авторизация*/
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 1080px;
+}
+
+.login-img {
+    margin-bottom: 16px;
+}
+
+.login-img img {
+    max-height: 70px;
+    max-width: 70px;
+    margin: 0 auto;
+}
+
+.login-welcome {
+    font-weight: 700;
+    font-size: 2.125rem;
+    line-height: 1.175;
+    letter-spacing: 0.0073529412em;
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 8px;
+}
+
+.login-text {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.0125em;
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 32px;
+}
+
+.login-form {
+    max-width: 300px;
+    width: 100%;
+}
+
+.login-form-submit {
+    width: 100%;
+}
+
+.login-bottom-text {
+    text-align: center;
+}
+
+.login-register-link {
+    color: #0000EE;
+    text-decoration: underline;
 }

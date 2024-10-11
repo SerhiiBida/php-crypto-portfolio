@@ -6,3 +6,57 @@
 .show {
     display: block !important;
 }
+
+/*Собственный input */
+.custom-input-wrapper {
+    position: relative;
+    padding: 0 16px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    margin-bottom: 30px;
+}
+
+.custom-input-label {
+    position: absolute;
+    top: -11px;
+    left: 10px;
+    font-size: 13px;
+    padding: 0 3px;
+    background-color: rgba(249, 249, 249);
+    z-index: 1;
+}
+
+.custom-input {
+    padding: 16px 0;
+    width: 100%;
+    font-size: 16px;
+    background-color: var(--main-background-color);
+}
+
+.custom-input-error {
+    position: absolute;
+    left: 10px;
+    bottom: -22px;
+    font-size: 14px;
+    color: rgba(176, 0, 32);
+}
+
+/*Кнопки*/
+.submit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12px;
+    height: 36px;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.0892857143em;
+    line-height: normal;
+    cursor: pointer;
+    color: #fff;
+    border: 2px solid #2979FF;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
+    background-color: #2979FF;
+    margin-bottom: 12px;
+}

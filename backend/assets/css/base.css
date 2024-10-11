@@ -13,6 +13,11 @@
     font-style: normal;
 }
 
+:root {
+    --main-background-color: rgba(249, 249, 249);
+    --main-text-color: rgba(0, 0, 0, 0.87);
+}
+
 /* Обнуление */
 * {
     padding: 0;
@@ -33,6 +38,11 @@ a {
     color: inherit;
 }
 
+input:focus {
+    outline: none;
+    border: none;
+}
+
 html,
 body {
     height: 100%;
@@ -43,8 +53,9 @@ body {
     font-family: "Uni Neue", serif;
     font-weight: 400;
     font-style: normal;
-    /*font-size: 16px;*/
+    font-size: 16px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: var(--main-text-color);
 }
