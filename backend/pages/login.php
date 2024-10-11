@@ -27,20 +27,21 @@ require '../layouts/header.php';
             Log into your account
         </p>
         <form action="login.php" method="post" class="login-form">
-            <div class="login-form-email custom-input-wrapper">
-                <label for="email" class="login-form-email-label custom-input-label">
-                    Email
+            <div class="login-form-username custom-input-wrapper">
+                <label for="username" class="login-form-username-label custom-input-label">
+                    Username
                 </label>
                 <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="food@gmail.com"
-                        class="login-form-email-input custom-input"
-                        maxlength="254"
+                        type="text"
+                        name="username"
+                        id="username"
+                        placeholder="food228"
+                        class="login-form-username-input custom-input"
+                        minlength="5"
+                        maxlength="32"
                         required
                 >
-                <p class="login-form-email-error custom-input-error"></p>
+                <p class="login-form-username-error custom-input-error"></p>
             </div>
             <div class="login-form-password custom-input-wrapper">
                 <label for="password" class="login-form-password-label custom-input-label">
