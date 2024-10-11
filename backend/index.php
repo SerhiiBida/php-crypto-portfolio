@@ -13,10 +13,15 @@ require 'layouts/footer.php';
 <!--Заголовок-->
 <?php includeHeader(); ?>
 
-<main>
+<main class="main">
     <!--Меню-->
     <?php includeMenu(); ?>
 
+    <section class="welcome">
+        <h1 class="welcome-title">
+            Welcome
+        </h1>
+    </section>
 </main>
 
 <!--Подвал-->
