@@ -1,8 +1,13 @@
 <?php
 
-use Database\Users as Users;
-use Database\Languages as Languages;
-use Database\Countries as Countries;
+namespace Database;
+
+use Database\Tables\Countries;
+use Database\Tables\Users;
+use Database\Tables\Languages;
+use Database\Tables\UserLanguage;
+use Database\Tables\Interests;
+use Database\Tables\UserInterest;
 
 class DatabaseSchema
 {
@@ -25,9 +30,12 @@ class DatabaseSchema
         $this->pass = getenv('DB_PASS');
 
         $this->tables = [
+            Countries::$table,
             Users::$table,
             Languages::$table,
-            Countries::$table,
+            UserLanguage::$table,
+            Interests::$table,
+            UserInterest::$table,
         ];
 
         $this->connect();

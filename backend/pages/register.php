@@ -198,6 +198,7 @@ require '../layouts/header.php';
                         type="file"
                         id="profile-picture"
                         name="profile-picture"
+                        accept="image/png, image/gif, image/jpeg"
                         required
                 >
                 <p class="register-form-profile-picture-error custom-input-error"></p>

@@ -8,6 +8,9 @@ if (isset($_COOKIE['isAuth'])) {
     session_start();
 }
 
+// Подключаем библиотеки
+require __DIR__ . '/vendor/autoload.php';
+
 
 // Подключение к базе данных
 $host = getenv('DB_HOST_NETWORK');

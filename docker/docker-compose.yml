@@ -13,6 +13,7 @@ services:
       - .env
     ports:
       - "${PHP_PORT}:80"
+    restart: always
     networks:
       - backend
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Database;
+namespace Database\Tables;
 
 
 class Users
 {
-    static public string $table = '
+    public static string $table = '
         CREATE TABLE IF NOT EXISTS `users` (
             `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
             `username` VARCHAR(255) NOT NULL,
@@ -18,28 +18,6 @@ class Users
             `gender` VARCHAR(255) NOT NULL,
             `profile_picture` BLOB NOT NULL,
             FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`)
-        );
-    ';
-}
-
-
-class Languages
-{
-    static public string $table = '
-        CREATE TABLE IF NOT EXISTS `languages` (
-            `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-            `name` VARCHAR(255) NOT NULL
-        );
-    ';
-}
-
-
-class Countries
-{
-    static public string $table = '
-        CREATE TABLE IF NOT EXISTS `countries` (
-            `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-            `name` VARCHAR(255) NOT NULL
         );
     ';
 }
