@@ -1,5 +1,9 @@
 <?php
 
+use Database\Users as Users;
+use Database\Languages as Languages;
+use Database\Countries as Countries;
+
 class DatabaseSchema
 {
     /**
@@ -11,14 +15,7 @@ class DatabaseSchema
     private string $pass;
     private $pdo;
 
-    private array $tables = [
-        'CREATE TABLE IF NOT EXISTS `users` (
-            `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-            `username` VARCHAR(255) NOT NULL,
-            `password` VARCHAR(255) NOT NULL,
-            `birthday` DATE NOT NULL
-        )'
-    ];
+    private array $tables;
 
     function __construct()
     {
@@ -26,6 +23,12 @@ class DatabaseSchema
         $this->db = getenv('DB_NAME');
         $this->user = getenv('DB_USER');
         $this->pass = getenv('DB_PASS');
+
+        $this->tables = [
+            Users::$table,
+            Languages::$table,
+            Countries::$table,
+        ];
 
         $this->connect();
     }
