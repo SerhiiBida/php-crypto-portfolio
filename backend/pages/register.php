@@ -132,6 +132,22 @@ require '../layouts/header.php';
                     </option>
                 </select>
             </div>
+            <div class="register-form-languages">
+                <label for="languages">
+                    Languages mastered:
+                </label>
+                <select id="languages" name="languages" multiple>
+                    <option value="uk">
+                        Ukraine
+                    </option>
+                    <option value="en">
+                        English
+                    </option>
+                    <option value="fr">
+                        France
+                    </option>
+                </select>
+            </div>
             <div class="register-form-interests">
                 <p>
                     Interests:
