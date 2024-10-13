@@ -110,8 +110,9 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-/*Авторизация*/
-.login {
+/*Авторизация, регистрация*/
+.login,
+.register {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -119,17 +120,20 @@ body {
     max-height: 1080px;
 }
 
-.login-img {
+.login-img,
+.register-img {
     margin-bottom: 16px;
 }
 
-.login-img img {
+.login-img img,
+.register img {
     max-height: 70px;
     max-width: 70px;
     margin: 0 auto;
 }
 
-.login-welcome {
+.login-welcome,
+.register-welcome {
     font-weight: 700;
     font-size: 2.125rem;
     line-height: 1.175;
@@ -138,7 +142,8 @@ body {
     margin-bottom: 8px;
 }
 
-.login-text {
+.login-text,
+.register-text {
     font-size: 1.25rem;
     font-weight: 500;
     line-height: 1.6;
@@ -147,20 +152,61 @@ body {
     margin-bottom: 32px;
 }
 
-.login-form {
+.login-form,
+.register-form {
     max-width: 300px;
     width: 100%;
 }
 
-.login-form-submit {
+.login-form-submit,
+.register-form-submit {
     width: 100%;
 }
 
-.login-bottom-text {
+.login-bottom-text,
+.register-bottom-text {
     text-align: center;
 }
 
-.login-register-link {
+.login-register-link,
+.register-login-link {
     color: #0000EE;
     text-decoration: underline;
+}
+
+/*Регистрация*/
+.register-form-country {
+    margin-bottom: 20px;
+}
+
+.register-form-country-select {
+    font-size: 16px;
+}
+
+.register-form-interests {
+    margin-bottom: 20px;
+}
+
+.register-form-gender {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.register-form-gender input[type="radio"] {
+    width: 13px;
+    height: 13px;
+    transform: scale(1.5);
+}
+
+.register-form-profile-picture {
+    margin-bottom: 20px;
+}
+
+.register-form-profile-picture input[type="file"] {
+    font-size: 16px;
+}
+
+.register-form-terms {
+    margin-bottom: 20px;
 }

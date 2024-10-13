@@ -3,7 +3,10 @@
 ini_set('session.gc_maxlifetime', 172800);  // 2 дня
 ini_set('session.cookie_lifetime', 172800);
 
-session_start();
+// Еси авторизован, то создаем или продолжаем сессию
+if (isset($_COOKIE['isAuth'])) {
+    session_start();
+}
 
 
 // Подключение к базе данных
