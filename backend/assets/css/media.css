@@ -1,7 +1,12 @@
 @media (max-width: 1200px) {
+    .main-ml-256 {
+        margin-left: 0;
+    }
+
     /*Меню*/
     .menu {
-        position: fixed;
+        top: unset;
+        left: unset;
         bottom: 0;
         width: 100%;
         border-right: none;
