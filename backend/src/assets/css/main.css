@@ -219,6 +219,12 @@ body {
     margin-bottom: 20px;
 }
 
+.register-form-interests-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
 .register-form-gender {
     display: flex;
     gap: 16px;

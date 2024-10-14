@@ -1,10 +1,13 @@
 <?php
 
-namespace Database\Tables;
+namespace App\database\tables;
 
 
 class Users
 {
+    /**
+     * Таблица 'users'
+     */
     public static string $table = '
         CREATE TABLE IF NOT EXISTS `users` (
             `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,

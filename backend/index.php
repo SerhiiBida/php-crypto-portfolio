@@ -1,24 +1,24 @@
 <?php
-require 'settings.php';
+require './settings.php';
 // HEAD
-require 'layouts/head.php';
+require './src/layouts/head.php';
 ?>
 
 <body>
 <!--Заголовок-->
 <?php
-require 'layouts/header.php';
+require './src/layouts/header.php';
 ?>
 
 <main class="main">
     <!--Меню-->
     <?php
-    require 'layouts/menu.php';
+    require './src/layouts/menu.php';
     ?>
 
     <section class="welcome">
         <div class="welcome-img">
-            <img src="./assets/images/logo.png" alt="logo">
+            <img src="./src/assets/images/logo.png" alt="logo">
         </div>
         <h1 class="welcome-title">
             Crypto Portfolio
@@ -26,7 +26,7 @@ require 'layouts/header.php';
         <p class="welcome-text">
             Start now
         </p>
-        <a href="pages/login.php" class="welcome-button submit-btn">
+        <a href="./src/pages/login.php" class="welcome-button submit-btn">
             Log in
         </a>
     </section>
@@ -34,6 +34,6 @@ require 'layouts/header.php';
 
 <!--Подвал-->
 <?php
-require 'layouts/footer.php';
+require './src/layouts/footer.php';
 ?>
 </body>

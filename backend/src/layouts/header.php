@@ -5,7 +5,7 @@
         <span class="header-burger-line"></span>
         <span class="header-burger-line"></span>
     </div>
-    <a href="../index.php">
+    <a href="../../index.php">
         <h3 class="header-title">
             Crypto Portfolio
         </h3>

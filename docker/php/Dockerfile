@@ -13,4 +13,7 @@ COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 WORKDIR /var/www/html
 
 # Устанавливаем зависимости через Composer (если есть composer.json)
-RUN if [ -f "composer.json" ]; then composer install; fi
+RUN if [ -f "composer.json" ]; then \
+        composer install; \
+        composer dump-autoload; \
+    fi
