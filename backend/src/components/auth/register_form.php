@@ -36,8 +36,9 @@ $languages = $languagesTable->getAll();
                 maxlength="32"
                 required
         >
-        <p class="register-form-username-error custom-input-error"></p>
     </div>
+    <p class="register-form-username-error custom-input-error">
+    </p>
     <div class="register-form-email custom-input-wrapper">
         <label for="email" class="register-form-email-label custom-input-label">
             Email
@@ -51,8 +52,9 @@ $languages = $languagesTable->getAll();
                 maxlength="255"
                 required
         >
-        <p class="register-form-email-error custom-input-error"></p>
     </div>
+    <p class="register-form-email-error custom-input-error">
+    </p>
     <div class="register-form-password custom-input-wrapper">
         <label for="password" class="register-form-password-label custom-input-label">
             Password
@@ -67,8 +69,9 @@ $languages = $languagesTable->getAll();
                 maxlength="16"
                 required
         >
-        <p class="register-form-password-error custom-input-error"></p>
     </div>
+    <p class="register-form-password-error custom-input-error">
+    </p>
     <div class="register-form-birthday custom-input-wrapper">
         <label for="birthday" class="register-form-birthday-label custom-input-label">
             Birthday
@@ -81,8 +84,9 @@ $languages = $languagesTable->getAll();
                 class="register-form-birthday-input custom-input"
                 required
         >
-        <p class="register-form-birthday-error custom-input-error"></p>
     </div>
+    <p class="register-form-birthday-error custom-input-error">
+    </p>
     <div class="register-form-salary custom-input-wrapper">
         <label for="salary" class="register-form-salary-label custom-input-label">
             Salary, $
@@ -95,8 +99,9 @@ $languages = $languagesTable->getAll();
                 class="register-form-salary-input custom-input"
                 required
         >
-        <p class="register-form-salary-error custom-input-error"></p>
     </div>
+    <p class="register-form-salary-error custom-input-error">
+    </p>
     <div class="register-form-years-experience custom-input-wrapper">
         <label for="years-experience" class="register-form-years-experience-label custom-input-label">
             Years of experience (BTC and others)
@@ -109,8 +114,9 @@ $languages = $languagesTable->getAll();
                 class="register-form-years-experience-input custom-input"
                 required
         >
-        <p class="register-form-years-experience-error custom-input-error"></p>
     </div>
+    <p class="register-form-years-experience-error custom-input-error">
+    </p>
     <div class="register-form-country">
         <label for="country">
             Country of Residence:
@@ -123,6 +129,8 @@ $languages = $languagesTable->getAll();
             <?php endforeach; ?>
         </select>
     </div>
+    <p class="register-form-country-error register-form-error">
+    </p>
     <div class="register-form-languages">
         <label for="languages">
             Languages mastered:
@@ -135,6 +143,8 @@ $languages = $languagesTable->getAll();
             <?php endforeach; ?>
         </select>
     </div>
+    <p class="register-form-languages-error register-form-error">
+    </p>
     <div class="register-form-interests">
         <p>
             Interests:
@@ -148,6 +158,8 @@ $languages = $languagesTable->getAll();
             <?php endforeach; ?>
         </div>
     </div>
+    <p class="register-form-interests-error register-form-error">
+    </p>
     <div class="register-form-gender">
                 <span>
                     Gender:
@@ -173,6 +185,8 @@ $languages = $languagesTable->getAll();
             Female
         </label>
     </div>
+    <p class="register-form-gender-error register-form-error">
+    </p>
     <div class="register-form-profile-picture">
         <label for="profile-picture">
             Profile photo:
@@ -184,8 +198,9 @@ $languages = $languagesTable->getAll();
                 accept="image/png, image/gif, image/jpeg"
                 required
         >
-        <p class="register-form-profile-picture-error custom-input-error"></p>
     </div>
+    <p class="register-form-profile-picture-error register-form-error">
+    </p>
     <div class="register-form-terms">
         <label>
             <input
@@ -196,6 +211,8 @@ $languages = $languagesTable->getAll();
             I agree to provide personal data.
         </label>
     </div>
+    <p class="register-form-terms-error register-form-error">
+    </p>
     <button type="submit" class="register-form-submit submit-btn">
         Log in
     </button>

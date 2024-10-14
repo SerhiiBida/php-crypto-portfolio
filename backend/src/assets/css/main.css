@@ -192,16 +192,8 @@ body {
 }
 
 /*Регистрация*/
-.register-form-country {
-    margin-bottom: 20px;
-}
-
 .register-form-country-select {
     font-size: 16px;
-}
-
-.register-form-languages {
-    margin-bottom: 20px;
 }
 
 .register-form-languages label {
@@ -215,10 +207,6 @@ body {
     width: 100%;
 }
 
-.register-form-interests {
-    margin-bottom: 20px;
-}
-
 .register-form-interests-checkboxes {
     display: flex;
     flex-wrap: wrap;
@@ -228,7 +216,6 @@ body {
 .register-form-gender {
     display: flex;
     gap: 16px;
-    margin-bottom: 20px;
 }
 
 .register-form-gender input[type="radio"] {
@@ -237,14 +224,13 @@ body {
     transform: scale(1.5);
 }
 
-.register-form-profile-picture {
-    margin-bottom: 20px;
-}
-
 .register-form-profile-picture input[type="file"] {
     font-size: 16px;
 }
 
-.register-form-terms {
-    margin-bottom: 20px;
+.register-form-error {
+    padding-top: 6px;
+    font-size: 14px;
+    color: rgba(176, 0, 32);
+    margin-bottom: 10px;
 }
