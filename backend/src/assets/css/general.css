@@ -7,6 +7,15 @@
     display: block !important;
 }
 
+/*Ошибки*/
+.border-error {
+    border-color: rgba(176, 0, 32);
+}
+
+.text-error {
+    color: rgba(176, 0, 32);
+}
+
 /*Собственный input */
 .custom-input-wrapper {
     position: relative;

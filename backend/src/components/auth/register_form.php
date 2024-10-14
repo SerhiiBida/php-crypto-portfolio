@@ -21,6 +21,7 @@ $languages = $languagesTable->getAll();
         action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>"
         method="post"
         class="register-form"
+        enctype="multipart/form-data"
 >
     <div class="register-form-username custom-input-wrapper">
         <label for="username" class="register-form-username-label custom-input-label">
@@ -34,7 +35,6 @@ $languages = $languagesTable->getAll();
                 class="register-form-username-input custom-input"
                 minlength="5"
                 maxlength="32"
-                required
         >
     </div>
     <p class="register-form-username-error custom-input-error">
@@ -50,7 +50,6 @@ $languages = $languagesTable->getAll();
                 placeholder="food@gmail.com"
                 class="register-form-email-input custom-input"
                 maxlength="255"
-                required
         >
     </div>
     <p class="register-form-email-error custom-input-error">
@@ -67,7 +66,6 @@ $languages = $languagesTable->getAll();
                 class="register-form-password-input custom-input"
                 minlength="8"
                 maxlength="16"
-                required
         >
     </div>
     <p class="register-form-password-error custom-input-error">
@@ -82,7 +80,6 @@ $languages = $languagesTable->getAll();
                 id="birthday"
                 placeholder="2000-01-01"
                 class="register-form-birthday-input custom-input"
-                required
         >
     </div>
     <p class="register-form-birthday-error custom-input-error">
@@ -97,7 +94,6 @@ $languages = $languagesTable->getAll();
                 id="salary"
                 placeholder="3433.35"
                 class="register-form-salary-input custom-input"
-                required
         >
     </div>
     <p class="register-form-salary-error custom-input-error">
@@ -112,7 +108,6 @@ $languages = $languagesTable->getAll();
                 id="years-experience"
                 placeholder="5"
                 class="register-form-years-experience-input custom-input"
-                required
         >
     </div>
     <p class="register-form-years-experience-error custom-input-error">
@@ -135,7 +130,7 @@ $languages = $languagesTable->getAll();
         <label for="languages">
             Languages mastered:
         </label>
-        <select id="languages" name="languages" multiple>
+        <select id="languages" name="languages[]" multiple>
             <?php foreach ($languages as $language): ?>
                 <option value="<?php echo $language['id'] ?>">
                     <?php echo $language['name'] ?>
@@ -152,7 +147,7 @@ $languages = $languagesTable->getAll();
         <div class="register-form-interests-checkboxes">
             <?php foreach ($interests as $interest): ?>
                 <label>
-                    <input type="checkbox" name="interests" value="<?php echo $interest['id'] ?>">
+                    <input type="checkbox" name="interests[]" value="<?php echo $interest['id'] ?>">
                     <?php echo $interest['name'] ?>
                 </label>
             <?php endforeach; ?>
@@ -170,7 +165,6 @@ $languages = $languagesTable->getAll();
                     name="gender"
                     value="male"
                     class="register-form-male-radio"
-                    required
             >
             Male
         </label>
@@ -180,7 +174,6 @@ $languages = $languagesTable->getAll();
                     name="gender"
                     value="female"
                     class="register-form-female-radio"
-                    required
             >
             Female
         </label>
@@ -196,7 +189,6 @@ $languages = $languagesTable->getAll();
                 id="profile-picture"
                 name="profile-picture"
                 accept="image/png, image/gif, image/jpeg"
-                required
         >
     </div>
     <p class="register-form-profile-picture-error register-form-error">
@@ -206,7 +198,6 @@ $languages = $languagesTable->getAll();
             <input
                     type="checkbox"
                     name="terms"
-                    required
             >
             I agree to provide personal data.
         </label>
