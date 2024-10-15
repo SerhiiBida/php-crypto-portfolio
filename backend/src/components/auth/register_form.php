@@ -155,6 +155,7 @@ $languages = $languagesTable->getAll();
         </select>
     </div>
     <p class="register-form-country-error register-form-error">
+        <?php echo getFieldError('country'); ?>
     </p>
     <div class="register-form-languages">
         <label for="languages">
@@ -169,6 +170,7 @@ $languages = $languagesTable->getAll();
         </select>
     </div>
     <p class="register-form-languages-error register-form-error">
+        <?php echo getFieldError('languages'); ?>
     </p>
     <div class="register-form-interests">
         <p>
@@ -184,6 +186,7 @@ $languages = $languagesTable->getAll();
         </div>
     </div>
     <p class="register-form-interests-error register-form-error">
+        <?php echo getFieldError('interests'); ?>
     </p>
     <div class="register-form-gender">
                 <span>
@@ -209,6 +212,7 @@ $languages = $languagesTable->getAll();
         </label>
     </div>
     <p class="register-form-gender-error register-form-error">
+        <?php echo getFieldError('gender'); ?>
     </p>
     <div class="register-form-profile-picture">
         <label for="profile-picture">
@@ -216,12 +220,13 @@ $languages = $languagesTable->getAll();
         </label>
         <input
                 type="file"
-                id="profile-picture"
                 name="profile-picture"
+                id="profile-picture"
                 accept="image/png, image/gif, image/jpeg"
         >
     </div>
     <p class="register-form-profile-picture-error register-form-error">
+        <?php echo getFieldError('profile-picture'); ?>
     </p>
     <div class="register-form-terms">
         <label>
@@ -233,6 +238,7 @@ $languages = $languagesTable->getAll();
         </label>
     </div>
     <p class="register-form-terms-error register-form-error">
+        <?php echo getFieldError('terms'); ?>
     </p>
     <button type="submit" class="register-form-submit submit-btn">
         Log in

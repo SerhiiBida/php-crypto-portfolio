@@ -1,5 +1,6 @@
 <?php
 
+use App\validators\auth\AuthValidator;
 use App\validators\GlobalValidator;
 
 
@@ -9,7 +10,7 @@ $formErrors = [];
 // Обработка формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-//    echo json_encode($_POST);
+    echo json_encode($_POST);
 
     $requiredTextFields = [
         'username' => 'str',
@@ -58,7 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
     }
 
-    $validator = new GlobalValidator($rawData, 'registration');
+    $authValidator = new AuthValidator('register');
+
+    $validator = new GlobalValidator($rawData, $authValidator);
 
     $check = $validator->validate();
 
