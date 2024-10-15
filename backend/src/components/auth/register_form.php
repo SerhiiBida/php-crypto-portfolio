@@ -23,8 +23,11 @@ $languages = $languagesTable->getAll();
         class="register-form"
         enctype="multipart/form-data"
 >
-    <div class="register-form-username custom-input-wrapper">
-        <label for="username" class="register-form-username-label custom-input-label">
+    <div class="register-form-username custom-input-wrapper <?php echo getClassBorderError('username') ?>">
+        <label
+                for="username"
+                class="register-form-username-label custom-input-label <?php echo getClassError('username') ?>"
+        >
             Username
         </label>
         <input
@@ -35,12 +38,17 @@ $languages = $languagesTable->getAll();
                 class="register-form-username-input custom-input"
                 minlength="5"
                 maxlength="32"
+                value="<?php echo formTextValue('username'); ?>"
         >
     </div>
     <p class="register-form-username-error custom-input-error">
+        <?php echo getFieldError('username'); ?>
     </p>
-    <div class="register-form-email custom-input-wrapper">
-        <label for="email" class="register-form-email-label custom-input-label">
+    <div class="register-form-email custom-input-wrapper <?php echo getClassBorderError('email') ?>">
+        <label
+                for="email"
+                class="register-form-email-label custom-input-label <?php echo getClassError('email') ?>"
+        >
             Email
         </label>
         <input
@@ -50,12 +58,17 @@ $languages = $languagesTable->getAll();
                 placeholder="food@gmail.com"
                 class="register-form-email-input custom-input"
                 maxlength="255"
+                value="<?php echo formTextValue('email'); ?>"
         >
     </div>
     <p class="register-form-email-error custom-input-error">
+        <?php echo getFieldError('email'); ?>
     </p>
-    <div class="register-form-password custom-input-wrapper">
-        <label for="password" class="register-form-password-label custom-input-label">
+    <div class="register-form-password custom-input-wrapper  <?php echo getClassBorderError('password') ?>">
+        <label
+                for="password"
+                class="register-form-password-label custom-input-label <?php echo getClassError('password') ?>"
+        >
             Password
         </label>
         <input
@@ -66,12 +79,17 @@ $languages = $languagesTable->getAll();
                 class="register-form-password-input custom-input"
                 minlength="8"
                 maxlength="16"
+                value="<?php echo formTextValue('password'); ?>"
         >
     </div>
     <p class="register-form-password-error custom-input-error">
+        <?php echo getFieldError('password'); ?>
     </p>
-    <div class="register-form-birthday custom-input-wrapper">
-        <label for="birthday" class="register-form-birthday-label custom-input-label">
+    <div class="register-form-birthday custom-input-wrapper  <?php echo getClassBorderError('birthday') ?>">
+        <label
+                for="birthday"
+                class="register-form-birthday-label custom-input-label <?php echo getClassError('birthday') ?>"
+        >
             Birthday
         </label>
         <input
@@ -80,12 +98,17 @@ $languages = $languagesTable->getAll();
                 id="birthday"
                 placeholder="2000-01-01"
                 class="register-form-birthday-input custom-input"
+                value="<?php echo formTextValue('birthday'); ?>"
         >
     </div>
     <p class="register-form-birthday-error custom-input-error">
+        <?php echo getFieldError('birthday'); ?>
     </p>
-    <div class="register-form-salary custom-input-wrapper">
-        <label for="salary" class="register-form-salary-label custom-input-label">
+    <div class="register-form-salary custom-input-wrapper  <?php echo getClassBorderError('salary') ?>">
+        <label
+                for="salary"
+                class="register-form-salary-label custom-input-label <?php echo getClassError('salary') ?>"
+        >
             Salary, $
         </label>
         <input
@@ -94,12 +117,17 @@ $languages = $languagesTable->getAll();
                 id="salary"
                 placeholder="3433.35"
                 class="register-form-salary-input custom-input"
+                value="<?php echo formTextValue('salary'); ?>"
         >
     </div>
     <p class="register-form-salary-error custom-input-error">
+        <?php echo getFieldError('salary'); ?>
     </p>
-    <div class="register-form-years-experience custom-input-wrapper">
-        <label for="years-experience" class="register-form-years-experience-label custom-input-label">
+    <div class="register-form-years-experience custom-input-wrapper <?php echo getClassBorderError('years-experience') ?>">
+        <label
+                for="years-experience"
+                class="register-form-years-experience-label custom-input-label <?php echo getClassError('years-experience') ?>"
+        >
             Years of experience (BTC and others)
         </label>
         <input
@@ -108,9 +136,11 @@ $languages = $languagesTable->getAll();
                 id="years-experience"
                 placeholder="5"
                 class="register-form-years-experience-input custom-input"
+                value="<?php echo formTextValue('years-experience'); ?>"
         >
     </div>
     <p class="register-form-years-experience-error custom-input-error">
+        <?php echo getFieldError('years-experience'); ?>
     </p>
     <div class="register-form-country">
         <label for="country">

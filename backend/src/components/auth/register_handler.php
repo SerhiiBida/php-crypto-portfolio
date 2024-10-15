@@ -2,9 +2,14 @@
 
 use App\validators\GlobalValidator;
 
+
+// Храним ошибки
+$formErrors = [];
+
+// Обработка формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    echo json_encode($_POST);
+//    echo json_encode($_POST);
 
     $requiredTextFields = [
         'username' => 'str',
@@ -26,19 +31,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Подготовка текстовых данных
     foreach ($requiredTextFields as $field => $type) {
         if (isset($_POST[$field])) {
-            $rawData[$field] = [$type, $_POST[$field]];
+            $rawData[$field] = [
+                'type' => $type,
+                'value' => $_POST[$field]
+            ];
 
         } else {
-            $rawData[$field] = [$type, null];
+            $rawData[$field] = [
+                'type' => $type,
+                'value' => null
+            ];
         }
     }
 
     // Подготовка файловых данных
     if (isset($_FILES['profile-picture'])) {
-        $rawData['profile-picture'] = ['file', $_FILES['profile-picture']];
+        $rawData['profile-picture'] = [
+            'type' => 'file',
+            'value' => $_FILES['profile-picture']
+        ];
 
     } else {
-        $rawData['profile-picture'] = ['file', null];
+        $rawData['profile-picture'] = [
+            'type' => 'file',
+            'value' => null
+        ];
     }
 
     $validator = new GlobalValidator($rawData, 'registration');
@@ -49,8 +66,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Сохраняем пользователя
 
     } else {
-        // Отображаем ошибки и старые данные
-        $oldData = $validator->oldData;
+        global $formErrors;
+
+        // Сохраняем ошибки
         $formErrors = $validator->errors;
     }
+}
+
+// Вывод старых значений если есть
+function formTextValue($fieldName): string
+{
+    return isset($_POST[$fieldName]) ? htmlspecialchars($_POST[$fieldName]) : '';
+}
+
+
+// Вывод ошибки
+function getFieldError($fieldName): string
+{
+    global $formErrors;
+
+    return $formErrors[$fieldName] ?? '';
+}
+
+
+// Добавление классов ошибок css
+function getClassError($fieldName): string
+{
+    global $formErrors;
+
+    return isset($formErrors[$fieldName]) ? 'text-error' : '';
+}
+
+function getClassBorderError($fieldName): string
+{
+    global $formErrors;
+
+    return isset($formErrors[$fieldName]) ? 'border-error' : '';
 }

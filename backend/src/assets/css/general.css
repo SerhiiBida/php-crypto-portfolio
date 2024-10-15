@@ -9,11 +9,11 @@
 
 /*Ошибки*/
 .border-error {
-    border-color: rgba(176, 0, 32);
+    border-color: rgba(176, 0, 32) !important;
 }
 
 .text-error {
-    color: rgba(176, 0, 32);
+    color: rgba(176, 0, 32) !important;;
 }
 
 /*Собственный input */
