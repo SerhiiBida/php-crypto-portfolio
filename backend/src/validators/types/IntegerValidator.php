@@ -32,7 +32,7 @@ class IntegerValidator implements TypeValidatorInterface
             return false;
         }
 
-        $number = floatval($value);
+        $number = intval($value);
 
         if ($number < 0) {
             $errors[$fieldName] = 'Cannot be less than 0';

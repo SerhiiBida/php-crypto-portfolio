@@ -18,7 +18,7 @@ class FloatValidator implements TypeValidatorInterface
             return false;
         }
 
-        if (!is_string($value) && !is_float($value)) {
+        if (!is_string($value) && !is_float($value) && !is_int($value)) {
             $errors[$fieldName] = 'There must be a number';
 
             return false;
