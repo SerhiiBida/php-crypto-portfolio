@@ -29,6 +29,11 @@ class AuthValidator implements AdditionalValidatorInterface
             }
         }
 
+        // Если авторизация
+        if ($this->isLogin) {
+            // Поиск пользователя
+        }
+
         return $check;
     }
 }

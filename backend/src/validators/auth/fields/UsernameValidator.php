@@ -31,17 +31,18 @@ class UsernameValidator implements AuthFieldValidatorInterface
             return false;
         }
 
-        // Есть ли такой username
-        $users = new Users();
+        if (!$isLogin) {
+            // Есть ли такой username
+            $users = new Users();
 
-        $usernames = $users->searchByUsername($value);
+            $usernames = $users->searchUsernames($value);
 
-        if ($isLogin) {
-            // Авторизация
-
-
-        } else {
             // Регистрация
+            if (in_array($value, $usernames)) {
+                $errors[$fieldName] = 'Username already exists';
+
+                return false;
+            }
         }
 
         return true;
