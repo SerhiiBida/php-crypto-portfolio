@@ -9,5 +9,5 @@ interface AdditionalValidatorInterface
      * Интерфейс для дополнительных валидаторов
      * передаваемых в GlobalValidator
      */
-    public function validate(): bool;
+    public function validate(array $fields, array &$errors): bool;
 }

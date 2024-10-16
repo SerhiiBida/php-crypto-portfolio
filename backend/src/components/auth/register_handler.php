@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
     }
 
-    $authValidator = new AuthValidator('register');
+    $authValidator = new AuthValidator(false);
 
     $validator = new GlobalValidator($rawData, $authValidator);
 
@@ -74,35 +74,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Сохраняем ошибки
         $formErrors = $validator->errors;
     }
-}
-
-// Вывод старых значений если есть
-function formTextValue($fieldName): string
-{
-    return isset($_POST[$fieldName]) ? htmlspecialchars($_POST[$fieldName]) : '';
-}
-
-
-// Вывод ошибки
-function getFieldError($fieldName): string
-{
-    global $formErrors;
-
-    return $formErrors[$fieldName] ?? '';
-}
-
-
-// Добавление классов ошибок css
-function getClassError($fieldName): string
-{
-    global $formErrors;
-
-    return isset($formErrors[$fieldName]) ? 'text-error' : '';
-}
-
-function getClassBorderError($fieldName): string
-{
-    global $formErrors;
-
-    return isset($formErrors[$fieldName]) ? 'border-error' : '';
 }

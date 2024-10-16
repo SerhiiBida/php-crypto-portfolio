@@ -12,7 +12,7 @@ class FileValidator implements TypeValidatorInterface
      */
     public static function validate(string $fieldName, $value, array &$errors): bool
     {
-        if (is_null($value)) {
+        if (empty($value)) {
             $errors[$fieldName] = 'Cannot be empty';
 
             return false;

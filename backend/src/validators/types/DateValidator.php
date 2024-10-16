@@ -18,9 +18,9 @@ class DateValidator implements TypeValidatorInterface
             return false;
         }
 
-        $inputDate = \DateTime::createFromFormat('YYYY-MM-DD', $value);
+        $inputDate = \DateTime::createFromFormat('Y-m-d', $value);
 
-        if (!$inputDate || $inputDate->format('YYYY-MM-DD') !== $value) {
+        if (!$inputDate || $inputDate->format('Y-m-d') !== $value) {
             $errors[$fieldName] = 'There must be a date in the format YYYY-MM-DD';
 
             return false;

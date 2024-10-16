@@ -2,6 +2,7 @@
 
 namespace App\validators\auth;
 
+use App\validators\auth\fields\UsernameValidator;
 use App\validators\interfaces\AdditionalValidatorInterface;
 
 
@@ -12,13 +13,22 @@ class AuthValidator implements AdditionalValidatorInterface
      *
      * @string $type -> 'login' or 'register'
      */
-    public function __construct(private string $type)
+    public function __construct(private readonly bool $isLogin)
     {
 
     }
 
-    public function validate(): bool
+    public function validate(array $fields, array &$errors): bool
     {
-        return true;
+        $check = true;
+
+        // Валидация
+        foreach ($fields as $fieldName => $data) {
+            if ($fieldName === 'username') {
+                $check = !UsernameValidator::validate($this->isLogin, $fieldName, $data['value'], $errors) ? false : $check;
+            }
+        }
+
+        return $check;
     }
 }

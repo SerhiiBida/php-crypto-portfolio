@@ -5,7 +5,10 @@ use App\database\tables\Interests;
 use App\database\tables\Languages;
 
 // Обработчик формы
-require 'register_handler.php';
+require __DIR__ . '/register_handler.php';
+// Отображение ошибок и старых данных
+require __DIR__ . '/../../utils/form/display_data.php';
+require __DIR__ . '/../../utils/form/display_errors.php';
 
 // Данные для select и т.д.
 $countriesTable = new Countries();
@@ -36,8 +39,8 @@ $languages = $languagesTable->getAll();
                 id="username"
                 placeholder="food228"
                 class="register-form-username-input custom-input"
-                minlength="5"
-                maxlength="32"
+                minlength="6"
+                maxlength="18"
                 value="<?php echo formTextValue('username'); ?>"
         >
     </div>
@@ -148,7 +151,10 @@ $languages = $languagesTable->getAll();
         </label>
         <select id="country" name="country" class="register-form-country-select">
             <?php foreach ($countries as $country): ?>
-                <option value="<?php echo $country['id'] ?>">
+                <option
+                        value="<?php echo $country['id'] ?>"
+                    <?php echo formSelectValue('country', $country['id']); ?>
+                >
                     <?php echo $country['name'] ?>
                 </option>
             <?php endforeach; ?>
@@ -163,7 +169,10 @@ $languages = $languagesTable->getAll();
         </label>
         <select id="languages" name="languages[]" multiple>
             <?php foreach ($languages as $language): ?>
-                <option value="<?php echo $language['id'] ?>">
+                <option
+                        value="<?php echo $language['id'] ?>"
+                    <?php echo formSelectArrayValue('languages', $language['id']); ?>
+                >
                     <?php echo $language['name'] ?>
                 </option>
             <?php endforeach; ?>
@@ -179,7 +188,12 @@ $languages = $languagesTable->getAll();
         <div class="register-form-interests-checkboxes">
             <?php foreach ($interests as $interest): ?>
                 <label>
-                    <input type="checkbox" name="interests[]" value="<?php echo $interest['id'] ?>">
+                    <input
+                            type="checkbox"
+                            name="interests[]"
+                            value="<?php echo $interest['id'] ?>"
+                        <?php echo formCheckboxArrayValue('interests', $interest['id']); ?>
+                    >
                     <?php echo $interest['name'] ?>
                 </label>
             <?php endforeach; ?>
@@ -198,6 +212,7 @@ $languages = $languagesTable->getAll();
                     name="gender"
                     value="male"
                     class="register-form-male-radio"
+                <?php echo formRadioCheckboxValue('gender', 'male'); ?>
             >
             Male
         </label>
@@ -207,6 +222,7 @@ $languages = $languagesTable->getAll();
                     name="gender"
                     value="female"
                     class="register-form-female-radio"
+                <?php echo formRadioCheckboxValue('gender', 'female'); ?>
             >
             Female
         </label>
@@ -233,6 +249,7 @@ $languages = $languagesTable->getAll();
             <input
                     type="checkbox"
                     name="terms"
+                <?php echo formRadioCheckboxValue('terms', 'on'); ?>
             >
             I agree to provide personal data.
         </label>

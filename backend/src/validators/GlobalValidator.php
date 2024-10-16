@@ -32,6 +32,14 @@ class GlobalValidator extends GlobalValidatorAbstract
 
     }
 
+    // Поля в которых не найдено ошибок(1 поле = 1 ошибка в $errors)
+    private function getCorrectFields(): array
+    {
+        return array_filter($this->fields, function ($key) {
+            return !array_key_exists($key, $this->errors);
+        }, ARRAY_FILTER_USE_KEY);
+    }
+
     public function validate(): bool
     {
         $check = true;
@@ -64,6 +72,16 @@ class GlobalValidator extends GlobalValidatorAbstract
 
             if ($data['type'] === 'file') {
                 $check = !FileValidator::validate($fieldName, $data['value'], $this->errors) ? false : $check;
+            }
+        }
+
+        // Запуск дополнительной валидации
+        if (!is_null($this->additionalValidator) && count($this->errors) < count($this->fields)) {
+            // Поля у которых не найдено ошибок
+            $correctFields = $this->getCorrectFields();
+
+            if (!empty($correctFields)) {
+                $check = !$this->additionalValidator->validate($correctFields, $this->errors) ? false : $check;
             }
         }
 
