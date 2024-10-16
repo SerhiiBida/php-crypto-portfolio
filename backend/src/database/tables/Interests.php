@@ -36,4 +36,26 @@ class Interests implements TableInterface
             return null;
         }
     }
+
+    public function getExistingIds(array $ids): ?array
+    {
+        try {
+            // Количество данных для вставки
+            $inQuery = str_repeat('?,', count($ids) - 1) . '?';
+
+            $sql = "SELECT `id` FROM `interests` WHERE `id` IN ($inQuery)";
+
+            $sth = $this->pdo->prepare($sql);
+
+            $sth->execute($ids);
+
+            // FETCH_COLUMN - вернуть данные одного столбца в виде массива
+            return $sth->fetchAll(\PDO::FETCH_COLUMN);
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return null;
+        }
+    }
 }

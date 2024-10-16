@@ -18,8 +18,6 @@ class IntegerValidator implements TypeValidatorInterface
             return false;
         }
 
-        echo $value . '<br>';
-
         if (!is_string($value) && !is_int($value)) {
             $errors[$fieldName] = 'There must be a number';
 

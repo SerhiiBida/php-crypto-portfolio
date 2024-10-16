@@ -3,9 +3,11 @@
 namespace App\validators\auth;
 
 use App\validators\auth\fields\BirthdayValidator;
-use App\validators\auth\fields\EmailValidator;
-use App\validators\auth\fields\PasswordValidator;
 use App\validators\auth\fields\CountryValidator;
+use App\validators\auth\fields\EmailValidator;
+use App\validators\auth\fields\LanguagesValidator;
+use App\validators\auth\fields\PasswordValidator;
+use App\validators\auth\fields\InterestsValidator;
 use App\validators\auth\fields\SalaryValidator;
 use App\validators\auth\fields\UsernameValidator;
 use App\validators\auth\fields\YearsExperienceValidator;
@@ -58,9 +60,13 @@ class AuthValidator implements AdditionalValidatorInterface
                 $check = !CountryValidator::validate($fieldName, $data['value'], $errors) ? false : $check;
             }
 
-//            if ($fieldName === 'languages') {
-//                $check = !LanguagesValidator::validate($fieldName, $data['value'], $errors) ? false : $check;
-//            }
+            if ($fieldName === 'languages') {
+                $check = !LanguagesValidator::validate($fieldName, $data['value'], $errors) ? false : $check;
+            }
+
+            if ($fieldName === 'interests') {
+                $check = !InterestsValidator::validate($fieldName, $data['value'], $errors) ? false : $check;
+            }
         }
 
 //        // Если авторизация
