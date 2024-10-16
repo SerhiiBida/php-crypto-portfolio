@@ -12,8 +12,14 @@ class FileValidator implements TypeValidatorInterface
      */
     public static function validate(string $fieldName, $value, array &$errors): bool
     {
+        if (is_null($value)) {
+            $errors[$fieldName] = 'Cannot be empty';
+
+            return false;
+        }
+
         // Проверка ошибок загрузки
-        if ($value['file']['error'] !== UPLOAD_ERR_OK) {
+        if ($value['error'] !== UPLOAD_ERR_OK) {
             $errors[$fieldName] = 'Error loading file';
 
             return false;
