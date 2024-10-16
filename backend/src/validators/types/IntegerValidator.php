@@ -18,8 +18,24 @@ class IntegerValidator implements TypeValidatorInterface
             return false;
         }
 
-        if ((!is_string($value) && !is_int($value)) || filter_var($value, FILTER_VALIDATE_INT) === false) {
-            $errors[$fieldName] = 'There must be a integer';
+        echo $value . '<br>';
+
+        if (!is_string($value) && !is_int($value)) {
+            $errors[$fieldName] = 'There must be a number';
+
+            return false;
+        }
+
+        if (filter_var($value, FILTER_VALIDATE_INT) === false) {
+            $errors[$fieldName] = 'The number is too high';
+
+            return false;
+        }
+
+        $number = floatval($value);
+
+        if ($number < 0) {
+            $errors[$fieldName] = 'Cannot be less than 0';
 
             return false;
         }

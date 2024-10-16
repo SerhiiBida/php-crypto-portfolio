@@ -15,8 +15,8 @@ class Users
     public static string $table = '
         CREATE TABLE IF NOT EXISTS `users` (
             `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-            `username` VARCHAR(255) NOT NULL,
-            `email` VARCHAR(255) NOT NULL,
+            `username` VARCHAR(255) NOT NULL UNIQUE,
+            `email` VARCHAR(255) NOT NULL UNIQUE,
             `password` VARCHAR(255) NOT NULL,
             `birthday` DATE NOT NULL,
             `salary` FLOAT NOT NULL,
@@ -28,14 +28,33 @@ class Users
         );
     ';
 
-    function searchUsernames($username): ?array
+    public function searchUsernames($username): ?array
     {
         try {
-            $sql = 'SELECT `username` FROM `interests` WHERE `username` = :username';
+            $sql = 'SELECT `username` FROM `users` WHERE `username` = :username';
 
             $sth = $this->pdo->prepare($sql);
 
             $sth->execute(['username' => $username]);
+
+            // FETCH_COLUMN - вернуть данные одного столбца в виде массива
+            return $sth->fetchAll(\PDO::FETCH_COLUMN);
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return null;
+        }
+    }
+
+    function searchEmails($email): ?array
+    {
+        try {
+            $sql = 'SELECT `email` FROM `users` WHERE `email` = :email';
+
+            $sth = $this->pdo->prepare($sql);
+
+            $sth->execute(['email' => $email]);
 
             // FETCH_COLUMN - вернуть данные одного столбца в виде массива
             return $sth->fetchAll(\PDO::FETCH_COLUMN);

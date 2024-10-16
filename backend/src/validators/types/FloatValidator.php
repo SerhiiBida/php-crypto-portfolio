@@ -18,8 +18,22 @@ class FloatValidator implements TypeValidatorInterface
             return false;
         }
 
-        if ((!is_string($value) && !is_float($value)) || filter_var($value, FILTER_VALIDATE_FLOAT) === false) {
-            $errors[$fieldName] = 'There must be a float';
+        if (!is_string($value) && !is_float($value)) {
+            $errors[$fieldName] = 'There must be a number';
+
+            return false;
+        }
+
+        if (filter_var($value, FILTER_VALIDATE_FLOAT) === false) {
+            $errors[$fieldName] = 'The number is too high';
+
+            return false;
+        }
+
+        $number = floatval($value);
+
+        if ($number < 0) {
+            $errors[$fieldName] = 'Cannot be less than 0';
 
             return false;
         }
