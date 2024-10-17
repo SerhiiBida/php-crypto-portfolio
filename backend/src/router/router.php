@@ -2,7 +2,7 @@
 
 // РОУТИНГ
 // Виды страниц
-$authPages = ['login', 'register'];
+$authPages = ['login', 'register', 'logout'];
 
 $generalPages = ['index'];
 
