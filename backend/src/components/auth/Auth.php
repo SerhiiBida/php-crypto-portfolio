@@ -130,8 +130,6 @@ class Auth
             setcookie('username', '', time() - 3600, '/');
             setcookie('email', '', time() - 3600, '/');
 
-            echo 'dfhdfhfhfdhdhfd' . '<br>';
-
             // Завершаем и очищаем сессию
             session_destroy();
         }
