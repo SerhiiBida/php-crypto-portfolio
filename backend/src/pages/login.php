@@ -1,19 +1,23 @@
 <?php
-require '../../settings.php';
+require __DIR__ . '/../../settings.php';
+
+// Обработка формы
+require __DIR__ . '/../components/auth/login_handler.php';
+
 // HEAD
-require '../layouts/head.php';
+require __DIR__ . '/../layouts/head.php';
 ?>
 
 <body>
 <!--Заголовок-->
 <?php
-require '../layouts/header.php';
+require __DIR__ . '/../layouts/header.php';
 ?>
 
 <main class="main">
     <!--Меню-->
     <?php
-    require '../layouts/menu.php';
+    require __DIR__ . '/../layouts/menu.php';
     ?>
 
     <section class="login">
@@ -28,7 +32,7 @@ require '../layouts/header.php';
         </p>
 
         <?php
-        require '../components/auth/login_form.php';
+        require __DIR__ . '/../components/auth/login_form.php';
         ?>
 
         <p class="login-bottom-text">
@@ -42,6 +46,6 @@ require '../layouts/header.php';
 
 <!--Подвал-->
 <?php
-require '../layouts/footer.php';
+require __DIR__ . '/../layouts/footer.php';
 ?>
 </body>

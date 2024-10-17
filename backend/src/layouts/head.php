@@ -24,7 +24,7 @@ if ($_SERVER['SCRIPT_NAME'] === '/index.php') {
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=login"/>
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=deployed_code"/>
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=deployed_code"/>
     <link rel="stylesheet" href="<?php echo $links['mainStyle'] ?>">
     <link rel="stylesheet" href="<?php echo $links['mediaStyle'] ?>">
     <title>

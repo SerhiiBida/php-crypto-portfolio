@@ -43,7 +43,7 @@ class AuthValidator implements AdditionalValidatorInterface
             }
 
             if ($fieldName === 'password') {
-                $check = !PasswordValidator::validate($this->isLogin, $fieldName, $data['value'], $errors) ? false : $check;
+                $check = !PasswordValidator::validate($fieldName, $data['value'], $errors) ? false : $check;
             }
 
             if ($fieldName === 'birthday') {
@@ -78,12 +78,6 @@ class AuthValidator implements AdditionalValidatorInterface
                 $check = !ProfilePictureValidator::validate($fieldName, $data['value'], $errors) ? false : $check;
             }
         }
-
-//        // Если авторизация
-//        if ($this->isLogin) {
-//            // Поиск пользователя
-//
-//        }
 
         return $check;
     }

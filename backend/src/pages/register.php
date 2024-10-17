@@ -3,9 +3,6 @@ require '../../settings.php';
 
 // Обработчик формы
 require __DIR__ . '/../components/auth/register_handler.php';
-// Отображение ошибок и старых данных
-require __DIR__ . '/../utils/form/display_data.php';
-require __DIR__ . '/../utils/form/display_errors.php';
 
 // HEAD
 require '../layouts/head.php';

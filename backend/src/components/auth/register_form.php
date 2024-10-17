@@ -4,6 +4,11 @@ use App\database\tables\Countries;
 use App\database\tables\Interests;
 use App\database\tables\Languages;
 
+// Отображение ошибок и старых данных
+require __DIR__ . '/../../utils/form/display_data.php';
+require __DIR__ . '/../../utils/form/display_errors.php';
+require __DIR__ . '/display_auth_errors.php';
+
 // Данные для select и т.д.
 $countriesTable = new Countries();
 $interestsTable = new Interests();
@@ -36,6 +41,7 @@ $languages = $languagesTable->getAll();
                 minlength="6"
                 maxlength="18"
                 value="<?php echo formTextValue('username'); ?>"
+                required
         >
     </div>
     <p class="register-form-username-error custom-input-error">
@@ -56,6 +62,7 @@ $languages = $languagesTable->getAll();
                 class="register-form-email-input custom-input"
                 maxlength="255"
                 value="<?php echo formTextValue('email'); ?>"
+                required
         >
     </div>
     <p class="register-form-email-error custom-input-error">
@@ -77,6 +84,7 @@ $languages = $languagesTable->getAll();
                 minlength="8"
                 maxlength="16"
                 value="<?php echo formTextValue('password'); ?>"
+                required
         >
     </div>
     <p class="register-form-password-error custom-input-error">
@@ -96,6 +104,7 @@ $languages = $languagesTable->getAll();
                 placeholder="2000-01-01"
                 class="register-form-birthday-input custom-input"
                 value="<?php echo formTextValue('birthday'); ?>"
+                required
         >
     </div>
     <p class="register-form-birthday-error custom-input-error">
@@ -118,6 +127,7 @@ $languages = $languagesTable->getAll();
                 step="0.01"
                 class="register-form-salary-input custom-input"
                 value="<?php echo formTextValue('salary'); ?>"
+                required
         >
     </div>
     <p class="register-form-salary-error custom-input-error">
@@ -140,6 +150,7 @@ $languages = $languagesTable->getAll();
                 maxlength="3"
                 class="register-form-years-experience-input custom-input"
                 value="<?php echo formTextValue('years-experience'); ?>"
+                required
         >
     </div>
     <p class="register-form-years-experience-error custom-input-error">
@@ -256,6 +267,9 @@ $languages = $languagesTable->getAll();
     </div>
     <p class="register-form-terms-error register-form-error">
         <?php echo getFieldError('terms'); ?>
+    </p>
+    <p class="auth-error">
+        <?php echo getAuthError(); ?>
     </p>
     <button type="submit" class="register-form-submit submit-btn">
         Log in

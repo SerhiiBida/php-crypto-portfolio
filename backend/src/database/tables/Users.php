@@ -68,6 +68,25 @@ class Users
         }
     }
 
+    public function getByUsername(string $username): ?array
+    {
+        try {
+            $sql = 'SELECT * FROM `users` WHERE `username` = :username';
+
+            $sth = $this->pdo->prepare($sql);
+
+            $sth->execute(['username' => $username]);
+
+            // FETCH_ASSOC - вернуть как ассоциативный массив
+            return $sth->fetch(\PDO::FETCH_ASSOC);
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return null;
+        }
+    }
+
     public function searchUsernames($username): ?array
     {
         try {

@@ -12,26 +12,22 @@ class Auth
     /**
      * Авторизация и регистрация пользователя
      */
-    public static function saveUserInCookie(int $userId, string $username, string $email): void
+    public static function saveUserInCookie(string $userId, string $username): void
     {
         $sessionTime = (int)getenv('SESSION_TIME');
 
-        $userIdStr = strval($userId);
-
         setcookie('auth', 'true', time() + $sessionTime, '/');
-        setcookie('userId', $userIdStr, time() + $sessionTime, '/');
+        setcookie('userId', $userId, time() + $sessionTime, '/');
         setcookie('username', $username, time() + $sessionTime, '/');
-        setcookie('email', $email, time() + $sessionTime, '/');
     }
 
-    public static function createSessionUser(int $userId, string $username, string $email): void
+    public static function createSessionUser(int $userId, string $username): void
     {
         session_start();
 
         $_SESSION['auth'] = true;
         $_SESSION['userId'] = $userId;
         $_SESSION['username'] = $username;
-        $_SESSION['email'] = $email;
     }
 
     public static function register(array $data, array &$errors): bool
@@ -69,8 +65,58 @@ class Auth
         }
 
         // Авторизация в cookie и session
-        Auth::saveUserInCookie($userId, $data['username'], $data['email']);
-        Auth::createSessionUser($userId, $data['username'], $data['email']);
+        Auth::saveUserInCookie(strval($userId), $data['username']);
+        Auth::createSessionUser($userId, $data['username']);
+
+        return true;
+    }
+
+    public static function login(array $data, array &$errors): bool
+    {
+        // Есть ли такой username
+        $users = new Users();
+
+        $usernames = $users->searchUsernames($data['username']);
+
+        if (is_null($usernames)) {
+            $errors['auth'] = 'Please try again later';
+
+            return false;
+        }
+
+        if (!in_array($data['username'], $usernames)) {
+            $errors['auth'] = 'Incorrect username or password';
+
+            return false;
+        }
+
+        // Получаем данные пользователя для проверки
+        $user = $users->getByUsername($data['username']);
+
+        if (is_null($user)) {
+            $errors['auth'] = 'Please try again later';
+
+            return false;
+        }
+
+        if (empty($user)) {
+            $errors['auth'] = 'Incorrect username or password';
+
+            return false;
+        }
+
+        // Проверка пароля
+        $userHash = $user['password'];
+
+        if (!password_verify($data['password'], $userHash)) {
+            $errors['auth'] = 'Incorrect username or password';
+
+            return false;
+        }
+
+        // Авторизация в cookie и session
+        Auth::saveUserInCookie(strval($user['id']), $data['username']);
+        Auth::createSessionUser(intval($user['id']), $data['username']);
 
         return true;
     }
@@ -83,6 +129,8 @@ class Auth
             setcookie('userId', '', time() - 3600, '/');
             setcookie('username', '', time() - 3600, '/');
             setcookie('email', '', time() - 3600, '/');
+
+            echo 'dfhdfhfhfdhdhfd' . '<br>';
 
             // Завершаем и очищаем сессию
             session_destroy();

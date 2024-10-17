@@ -2,15 +2,15 @@
 
 namespace App\validators\auth\fields;
 
-use App\validators\auth\interfaces\AuthFieldValidatorInterface;
+use App\validators\interfaces\FieldValidatorInterface;
 
 
-class PasswordValidator implements AuthFieldValidatorInterface
+class PasswordValidator implements FieldValidatorInterface
 {
     /**
      * Валидатор для поля password
      */
-    public static function validate(bool $isLogin, string $fieldName, $value, array &$errors): bool
+    public static function validate(string $fieldName, $value, array &$errors): bool
     {
         if (strlen($value) < 8 || strlen($value) > 16) {
             $errors[$fieldName] = 'The required length is from 8 to 16';
