@@ -1,5 +1,6 @@
 <?php
 
+use App\components\auth\Auth;
 use App\validators\auth\AuthValidator;
 use App\validators\GlobalValidator;
 
@@ -9,6 +10,7 @@ $formErrors = [];
 
 // Обработка формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    global $formErrors;
 
     //echo json_encode($_POST);
 
@@ -59,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
     }
 
+    // Валидация
     $authValidator = new AuthValidator(false);
 
     $validator = new GlobalValidator($rawData, $authValidator);
@@ -66,11 +69,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $check = $validator->validate();
 
     if ($check) {
-        // Сохраняем пользователя
+        // Готовим данные
+        $data = [];
 
+        $data['username'] = trim($_POST['username']);
+        $data['email'] = trim($_POST['email']);
+        $data['password'] = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
+        $data['birthday'] = trim($_POST['birthday']);
+        $data['salary'] = floatval($_POST['salary']);
+        $data['yearsExperience'] = intval($_POST['years-experience']);
+        $data['countryId'] = intval($_POST['country']);
+        $data['gender'] = trim($_POST['gender']);
+        $data['profilePicture'] = file_get_contents($_FILES['profile-picture']['tmp_name']);
+
+        // Регистрируем пользователя
+        $check = Auth::register($data, $formErrors);
+
+        if ($check) {
+            // Перенаправляем на страницу с портфелями
+            header('Location: ./portfolios.php');
+            exit();
+        }
     } else {
-        global $formErrors;
-
         // Сохраняем ошибки
         $formErrors = $validator->errors;
     }

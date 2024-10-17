@@ -1,10 +1,14 @@
 <?php
-// Установка времени сохранения сессии и куки
-ini_set('session.gc_maxlifetime', 172800);  // 2 дня
-ini_set('session.cookie_lifetime', 172800);
 
-// Еси авторизован, то создаем или продолжаем сессию
-if (isset($_COOKIE['isAuth'])) {
+// Установка времени сохранения сессии и куки
+ini_set('session.gc_maxlifetime', (int)getenv('SESSION_TIME'));
+ini_set('session.cookie_lifetime', (int)getenv('SESSION_TIME'));
+
+// Проверка прав доступа
+require __DIR__ . '/src/router/router.php';
+
+// Если авторизован, то создаем или продолжаем сессию
+if (isset($_COOKIE['auth'])) {
     session_start();
 }
 

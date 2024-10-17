@@ -4,12 +4,6 @@ use App\database\tables\Countries;
 use App\database\tables\Interests;
 use App\database\tables\Languages;
 
-// Обработчик формы
-require __DIR__ . '/register_handler.php';
-// Отображение ошибок и старых данных
-require __DIR__ . '/../../utils/form/display_data.php';
-require __DIR__ . '/../../utils/form/display_errors.php';
-
 // Данные для select и т.д.
 $countriesTable = new Countries();
 $interestsTable = new Interests();
@@ -121,7 +115,7 @@ $languages = $languagesTable->getAll();
                 placeholder="3433.35"
                 min="0"
                 max="100000000"
-                maxlength="9"
+                step="0.01"
                 class="register-form-salary-input custom-input"
                 value="<?php echo formTextValue('salary'); ?>"
         >
@@ -244,6 +238,7 @@ $languages = $languagesTable->getAll();
                 type="file"
                 name="profile-picture"
                 id="profile-picture"
+                accept="image/png, image/gif, image/jpeg, image/jpg"
         >
     </div>
     <p class="register-form-profile-picture-error register-form-error">

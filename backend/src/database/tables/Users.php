@@ -28,6 +28,46 @@ class Users
         );
     ';
 
+    public function add(
+        string $username,
+        string $email,
+        string $password,
+        string $birthday,
+        float  $salary,
+        int    $yearsExperience,
+        int    $countryId,
+        string $gender,
+        string $profilePicture
+    ): ?int
+    {
+        try {
+            $sql = 'INSERT INTO `users` (
+                     `username`, `email`, `password`,
+                    `birthday`, `salary`, `years_experience`,
+                     `country_id`, `gender`, `profile_picture`
+                     )
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+
+            $sth = $this->pdo->prepare($sql);
+
+            $sth->execute(
+                [
+                    $username, $email, $password,
+                    $birthday, $salary, $yearsExperience,
+                    $countryId, $gender, $profilePicture
+                ]
+            );
+
+            // id последней вставленной записи
+            return (int)$this->pdo->lastInsertId();
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return null;
+        }
+    }
+
     public function searchUsernames($username): ?array
     {
         try {
