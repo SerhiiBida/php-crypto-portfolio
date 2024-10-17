@@ -119,6 +119,9 @@ $languages = $languagesTable->getAll();
                 name="salary"
                 id="salary"
                 placeholder="3433.35"
+                min="0"
+                max="100000000"
+                maxlength="9"
                 class="register-form-salary-input custom-input"
                 value="<?php echo formTextValue('salary'); ?>"
         >
@@ -138,6 +141,9 @@ $languages = $languagesTable->getAll();
                 name="years-experience"
                 id="years-experience"
                 placeholder="5"
+                min="0"
+                max="100"
+                maxlength="3"
                 class="register-form-years-experience-input custom-input"
                 value="<?php echo formTextValue('years-experience'); ?>"
         >
@@ -238,7 +244,6 @@ $languages = $languagesTable->getAll();
                 type="file"
                 name="profile-picture"
                 id="profile-picture"
-                accept="image/png, image/gif, image/jpeg"
         >
     </div>
     <p class="register-form-profile-picture-error register-form-error">
