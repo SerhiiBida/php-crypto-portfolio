@@ -1,8 +1,13 @@
 <?php
 
 // Вывод старых значений если есть
-function formTextValue($fieldName): string
+function formTextValue($fieldName, $formName = null, $value = null): string
 {
+    // Если форм много на странице
+    if (!is_null($formName) && !isset($_POST[$formName])) {
+        return $value ?? '';
+    }
+
     return isset($_POST[$fieldName]) ? htmlspecialchars($_POST[$fieldName]) : '';
 }
 

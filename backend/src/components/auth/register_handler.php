@@ -10,8 +10,6 @@ $formErrors = [];
 
 // Обработка формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    global $formErrors;
-
     //echo json_encode($_POST);
 
     $requiredTextFields = [

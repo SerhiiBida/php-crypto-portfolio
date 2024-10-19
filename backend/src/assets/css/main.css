@@ -268,3 +268,65 @@ body {
     margin-bottom: 2px;
     text-align: center;
 }
+
+/*Страница "Портфели"*/
+.portfolios {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    max-height: 1080px;
+}
+
+.portfolios-form-wrapper {
+    max-width: 500px;
+    width: 100%;
+    padding: 25px;
+    border-radius: 6px;
+    border-color: rgba(0, 0, 0, 0.12);
+    border-style: solid;
+    border-width: 1px;
+    background-color: rgb(255, 255, 255);
+    margin: 8px;
+}
+
+.portfolios-form-title {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    letter-spacing: 0.0125em;
+    font-family: "Roboto", sans-serif;
+    text-transform: none;
+    font-weight: 700;
+    text-align: center;
+    color: #2979FF;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.portfolios-form-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.portfolios-form-text::before,
+.portfolios-form-text::after {
+    content: "";
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.2);;
+    flex: 1;
+}
+
+.portfolios-form-text::before {
+    margin-right: 5px;
+}
+
+.portfolios-form-text::after {
+    margin-left: 5px;
+}
+
+/*Форма добавления портфеля*/
+.add-portfolio-form-submit {
+    width: 100%;
+    margin-bottom: 0;
+}
