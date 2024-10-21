@@ -1,8 +1,3 @@
-<?php
-// Отображение ошибок и старых данных
-require __DIR__ . '/../../utils/form/display_data.php';
-require __DIR__ . '/../../utils/form/display_errors.php';
-?>
 <form
         action="<?php echo $_SERVER['PHP_SELF'] ?>"
         method="post"

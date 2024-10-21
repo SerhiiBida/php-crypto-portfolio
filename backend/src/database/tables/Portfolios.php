@@ -21,14 +21,14 @@ class Portfolios
         );
     ';
 
-    public function add(string $name, int $user_id): bool
+    public function add(string $name, int $userId): bool
     {
         try {
             $sql = 'INSERT INTO `portfolios` (`name`, `user_id`) VALUES (?, ?)';
 
             $sth = $this->pdo->prepare($sql);
 
-            $sth->execute([$name, $user_id]);
+            $sth->execute([$name, $userId]);
 
             return true;
 
@@ -36,6 +36,24 @@ class Portfolios
             echo 'Error: ' . $e->getMessage();
 
             return false;
+        }
+    }
+
+    public function getAllByUser(int $userId): ?array
+    {
+        try {
+            $sql = 'SELECT * FROM `portfolios` WHERE `user_id` = ?';
+
+            $sth = $this->pdo->prepare($sql);
+
+            $sth->execute([$userId]);
+
+            return $sth->FetchAll(\PDO::FETCH_ASSOC);
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return null;
         }
     }
 }

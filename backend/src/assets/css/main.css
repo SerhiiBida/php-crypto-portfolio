@@ -330,3 +330,44 @@ body {
     width: 100%;
     margin-bottom: 0;
 }
+
+/*Форма изменения портфеля*/
+.change-portfolio-form-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 5px;
+    margin: 15px 0 5px 0;
+}
+
+.change-portfolio-form-icon {
+    font-size: 36px;
+}
+
+.change-portfolio-form-input-error {
+    margin-bottom: 0;
+}
+
+.change-portfolio-form-change-button,
+.change-portfolio-form-delete-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border-radius: 50%;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
+}
+
+.change-portfolio-form-change-button span,
+.change-portfolio-form-delete-button span {
+    font-size: 38px;
+    color: #ffff;
+}
+
+.change-portfolio-form-change-button {
+    background-color: rgb(24, 103, 192);
+}
+
+.change-portfolio-form-delete-button {
+    background-color: #F44336;
+}
