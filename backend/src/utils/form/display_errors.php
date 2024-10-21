@@ -3,9 +3,16 @@
 // Вывод ошибки
 function getFieldError($fieldName, $formName = null): string
 {
-    global $formErrors;
+    // Получение данных
+    if (!is_null($formName)) {
+        // Если форм много на странице(авторизован пользователь)
+        $formErrors = $_COOKIE['auth'] && isset($_SESSION['formErrors']) ? $_SESSION['formErrors'] : [];
 
-    // Если форм много на странице
+    } else {
+        global $formErrors;
+    }
+
+    // Это форма не отправлена
     if (!is_null($formName) && !isset($_POST[$formName])) {
         return '';
     }

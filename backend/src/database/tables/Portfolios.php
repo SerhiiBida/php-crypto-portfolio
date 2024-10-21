@@ -92,4 +92,23 @@ class Portfolios
             return null;
         }
     }
+
+    // Принадлежит ли данная запись пользователю
+    public function isRecordOwnedByUser(int $id, int $userId): ?bool
+    {
+        try {
+            $sql = 'SELECT COUNT(*) FROM `portfolios` WHERE `id` = ? AND `user_id` = ?';
+
+            $sth = $this->pdo->prepare($sql);
+
+            $sth->execute([$id, $userId]);
+
+            return !empty($sth->FetchAll(\PDO::FETCH_ASSOC));
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return null;
+        }
+    }
 }

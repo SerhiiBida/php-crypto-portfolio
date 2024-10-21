@@ -1,4 +1,8 @@
 <?php
+// Отображение ошибок и старых данных
+require_once __DIR__ . '/../../utils/form/display_data.php';
+require_once __DIR__ . '/../../utils/form/display_errors.php';
+
 $formName = 'change-portfolio-form-' . $portfolioId;
 ?>
 <form
@@ -18,15 +22,18 @@ $formName = 'change-portfolio-form-' . $portfolioId;
                             name="name"
                             placeholder="Name"
                             class="change-portfolio-form-input custom-input"
-                            minlength="6"
-                            maxlength="18"
                             value="<?php echo formTextValue('name', $formName, $portfolioName); ?>"
-                            required
+
                     >
                 </label>
             </div>
             <p class="change-portfolio-form-input-error custom-input-error">
-                <?php echo getFieldError('name', $formName); ?>
+                <?php
+                echo getFieldError('name', $formName);
+
+                // Удаляем проверочное значение
+                unset($_POST[$formName]);
+                ?>
             </p>
         </div>
         <input type="hidden" name="portfolio-id" value="<?php echo $portfolioId; ?>">

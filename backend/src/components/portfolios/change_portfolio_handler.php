@@ -4,9 +4,6 @@ use App\database\tables\Portfolios;
 use App\validators\GlobalValidator;
 
 
-// Обнуляем
-$formErrors = [];
-
 // Проверка отправки динамической формы
 function checkSubmitDynamicForm(string $formName, array $data): bool
 {
@@ -22,6 +19,11 @@ function checkSubmitDynamicForm(string $formName, array $data): bool
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && checkSubmitDynamicForm('change-portfolio-form', $_POST)) {
+    // Обнуляем
+    $_SESSION['formErrors'] = [];
+
+    $portfolio = new Portfolios();
+
     // Сырые данные
     $rawData = [
         'id' => [
@@ -39,29 +41,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && checkSubmitDynamicForm('change-portf
 
     $check = $validator->validate();
 
+    // Нет ошибок c id, даем возможность удалить
+    if (!isset($_SESSION['formErrors']['id']) && isset($_POST['submit-button']) && $_POST['submit-button'] === 'delete') {
+        $id = intval($_POST['portfolio-id']);
+
+        // Портфель принадлежит пользователю
+        if ($portfolio->isRecordOwnedByUser($id, $_SESSION['userId'])) {
+            // Удаляем
+            $portfolio->delete($id);
+        }
+    }
+
+    // Глобальная проверка
     if ($check) {
         // Дополнительная валидация
         if (strlen($_POST['name']) < 6 || strlen($_POST['name']) > 18) {
-            $formErrors['name'] = 'The required length is from 6 to 18';
+            $_SESSION['formErrors']['name'] = 'The required length is from 6 to 18';
 
         } else {
-            $portfolio = new Portfolios();
-
-            $id = intval($_POST['portfolio-id']);
-            $name = trim($_POST['name']);
-
             if (isset($_POST['submit-button']) && $_POST['submit-button'] === 'change') {
-                // Изменяем
-                $portfolio->updateName($id, $name);
+                $id = intval($_POST['portfolio-id']);
+                $name = trim($_POST['name']);
 
-            } elseif (isset($_POST['submit-button']) && $_POST['submit-button'] === 'delete') {
-                // Удаляем
-                $portfolio->delete($id);
+                // Портфель принадлежит пользователю
+                if ($portfolio->isRecordOwnedByUser($id, $_SESSION['userId'])) {
+                    // Изменяем
+                    $portfolio->updateName($id, $name);
+                }
             }
         }
 
     } else {
         // Сохраняем ошибки
-        $formErrors = $validator->errors;
+        $_SESSION['formErrors'] = $validator->errors;
     }
 }

@@ -7,9 +7,6 @@ require '../../settings.php';
 require __DIR__ . '/../components/portfolios/change_portfolio_handler.php';
 // Обработка формы добавления портфеля
 require __DIR__ . '/../components/portfolios/add_portfolio_handler.php';
-// Отображение ошибок и старых данных
-require __DIR__ . '/../utils/form/display_data.php';
-require __DIR__ . '/../utils/form/display_errors.php';
 // HEAD
 require '../layouts/head.php';
 ?>

@@ -4,10 +4,10 @@ use App\database\tables\Portfolios;
 use App\validators\GlobalValidator;
 
 
-// Обнуляем
-$formErrors = [];
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-portfolio-form'])) {
+    // Обнуляем
+    $_SESSION['formErrors'] = [];
+
     // Сырые данные
     $rawData = [
         'name' => [
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-portfolio-form']))
     if ($check) {
         // Дополнительная валидация
         if (strlen($_POST['name']) < 6 || strlen($_POST['name']) > 18) {
-            $formErrors['name'] = 'The required length is from 6 to 18';
+            $_SESSION['formErrors']['name'] = 'The required length is from 6 to 18';
 
         } else {
             // Сохраняем
@@ -40,6 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-portfolio-form']))
 
     } else {
         // Сохраняем ошибки
-        $formErrors = $validator->errors;
+        $_SESSION['formErrors'] = $validator->errors;
     }
 }
