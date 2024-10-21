@@ -39,6 +39,42 @@ class Portfolios
         }
     }
 
+    public function updateName(int $id, string $name): bool
+    {
+        try {
+            $sql = 'UPDATE `portfolios` SET `name` = ? WHERE `id` = ?';
+
+            $sth = $this->pdo->prepare($sql);
+
+            $sth->execute([$name, $id]);
+
+            return true;
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return false;
+        }
+    }
+
+    public function delete(int $id): bool
+    {
+        try {
+            $sql = 'DELETE FROM `portfolios` WHERE `id` = ?';
+
+            $sth = $this->pdo->prepare($sql);
+
+            $sth->execute([$id]);
+
+            return true;
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return false;
+        }
+    }
+
     public function getAllByUser(int $userId): ?array
     {
         try {

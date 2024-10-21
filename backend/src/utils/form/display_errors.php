@@ -1,9 +1,14 @@
 <?php
 
 // Вывод ошибки
-function getFieldError($fieldName): string
+function getFieldError($fieldName, $formName = null): string
 {
     global $formErrors;
+
+    // Если форм много на странице
+    if (!is_null($formName) && !isset($_POST[$formName])) {
+        return '';
+    }
 
     return $formErrors[$fieldName] ?? '';
 }
@@ -17,9 +22,14 @@ function getClassError($fieldName): string
     return isset($formErrors[$fieldName]) ? 'text-error' : '';
 }
 
-function getClassBorderError($fieldName): string
+function getClassBorderError($fieldName, $formName = null): string
 {
     global $formErrors;
+
+    // Если форм много на странице
+    if (!is_null($formName) && !isset($_POST[$formName])) {
+        return '';
+    }
 
     return isset($formErrors[$fieldName]) ? 'border-error' : '';
 }
