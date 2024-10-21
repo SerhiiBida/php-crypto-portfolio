@@ -1,42 +1,7 @@
 <?php
 // Отображение ошибок и старых данных
-use App\validators\GlobalValidator;
-
 require __DIR__ . '/../../utils/form/display_data.php';
 require __DIR__ . '/../../utils/form/display_errors.php';
-
-// Обнуляем
-$formErrors = [];
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-portfolio-form'])) {
-    // Сырые данные
-    $rawData = [
-        'name' => [
-            'type' => 'str',
-            'value' => $_POST['name'] ?? null,
-        ]
-    ];
-
-    // Валидация
-    $validator = new GlobalValidator($rawData);
-
-    $check = $validator->validate();
-
-    if ($check) {
-        // Дополнительная валидация
-        if (strlen($_POST['name']) < 6 || strlen($_POST['name']) > 18) {
-            $formErrors['name'] = 'The required length is from 6 to 18';
-
-        } else {
-            // Сохраняем
-        }
-
-    } else {
-        // Сохраняем ошибки
-        $formErrors = $validator->errors;
-    }
-}
-
 ?>
 <form
         action="<?php echo $_SERVER['PHP_SELF'] ?>"

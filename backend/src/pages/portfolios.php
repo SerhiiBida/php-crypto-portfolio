@@ -1,5 +1,7 @@
 <?php
 require '../../settings.php';
+// Обработка формы добавления портфеля
+require __DIR__ . '/../components/portfolios/add_portfolio_handler.php';
 // HEAD
 require '../layouts/head.php';
 ?>
