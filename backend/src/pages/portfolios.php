@@ -56,6 +56,8 @@ require '../layouts/header.php';
                     }
                     ?>
                 </div>
+            <?php endif; ?>
+            <?php if (count($portfolios) > 0 && count($portfolios) < 6): ?>
                 <p class="portfolios-form-text">
                     Or
                 </p>
