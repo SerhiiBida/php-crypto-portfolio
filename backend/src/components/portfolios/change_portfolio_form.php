@@ -17,7 +17,7 @@
                             class="change-portfolio-form-input custom-input"
                             minlength="6"
                             maxlength="18"
-                            value="<?php echo formTextValue('name', 'change-portfolio-form'); ?>"
+                            value="<?php echo formTextValue('name', 'change-portfolio-form', $portfolioName); ?>"
                             required
                     >
                 </label>
@@ -26,6 +26,7 @@
                 <?php echo getFieldError('name'); ?>
             </p>
         </div>
+        <input type="hidden" name="portfolio-id" value="<?php echo $portfolioId; ?>">
         <input type="hidden" name="change-portfolio-form" value="true">
         <button type="submit" class="change-portfolio-form-change-button">
             <span class="material-symbols-outlined">

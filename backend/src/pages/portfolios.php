@@ -21,10 +21,10 @@ $portfoliosObj = new Portfolios();
 
 $userId = $_SESSION['userId'];
 
-$portfolio = $portfoliosObj->getAllByUser($userId);
+$portfolios = $portfoliosObj->getAllByUser($userId);
 
-if (is_null($portfolio)) {
-    $portfolio = [];
+if (is_null($portfolios)) {
+    $portfolios = [];
 }
 ?>
 
@@ -44,20 +44,27 @@ require '../layouts/header.php';
             <h2 class="portfolios-form-title">
                 Portfolios
             </h2>
-            <?php if ($_SESSION['auth']): ?>
+            <?php if ($portfolios): ?>
                 <div class="portfolios-form-change-names">
-                    <?php ?>
-                    <?php ?>
+                    <?php
+                    // Формы изменения
+                    foreach ($portfolios as $portfolio) {
+                        $portfolioId = $portfolio['id'];
+                        $portfolioName = $portfolio['name'];
+
+                        require __DIR__ . '/../components/portfolios/change_portfolio_form.php';
+                    }
+                    ?>
                 </div>
+                <p class="portfolios-form-text">
+                    Or
+                </p>
             <?php endif; ?>
             <?php
-            require __DIR__ . '/../components/portfolios/change_portfolio_form.php';
-            ?>
-            <p class="portfolios-form-text">
-                Or
-            </p>
-            <?php
-            require __DIR__ . '/../components/portfolios/add_portfolio_form.php'
+            // Форма добавления
+            if (count($portfolios) < 6) {
+                require __DIR__ . '/../components/portfolios/add_portfolio_form.php';
+            }
             ?>
         </div>
     </section>
