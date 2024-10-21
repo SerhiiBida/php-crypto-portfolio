@@ -97,7 +97,7 @@ class Portfolios
     public function isRecordOwnedByUser(int $id, int $userId): ?bool
     {
         try {
-            $sql = 'SELECT COUNT(*) FROM `portfolios` WHERE `id` = ? AND `user_id` = ?';
+            $sql = 'SELECT * FROM `portfolios` WHERE `id` = ? AND `user_id` = ?';
 
             $sth = $this->pdo->prepare($sql);
 

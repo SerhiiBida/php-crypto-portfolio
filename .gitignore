@@ -2,3 +2,4 @@
 docker/.env
 /backend/database/test.sql
 vendor/
+git.js
