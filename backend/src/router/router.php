@@ -1,5 +1,8 @@
 <?php
 
+use App\database\tables\Portfolios;
+
+
 // РОУТИНГ
 // Виды страниц
 $authPages = ['login', 'register'];
@@ -25,6 +28,23 @@ if (empty($_COOKIE['auth']) && $currentPage === 'logout') {
 if (isset($_COOKIE['auth']) && in_array($currentPage, $authPages)) {
     header('Location: ./portfolios.php');
     exit();
+}
+
+// Проверка прав на доступ к портфелю
+if ($currentPage === 'portfolio') {
+    // Нет id в URL портфеля
+    if (!isset($_GET['page-id'])) {
+        header('Location: ./portfolios.php');
+        exit();
+    }
+
+    $portfoliosObj = new Portfolios();
+
+    // Портфель не принадлежит пользователю
+    if (!$portfoliosObj->isRecordOwnedByUser($_GET['page-id'], $_SESSION['userId'])) {
+        header('Location: ./portfolios.php');
+        exit();
+    }
 }
 
 
