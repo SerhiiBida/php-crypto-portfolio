@@ -16,6 +16,9 @@ require_once __DIR__ . '/../../utils/form/display_errors.php';
                     placeholder="Name"
                     class="add-portfolio-form-input custom-input"
                     value="<?php echo formTextValue('name', 'add-portfolio-form'); ?>"
+                    minlength="6"
+                    maxlength="18"
+                    required
             >
         </label>
     </div>

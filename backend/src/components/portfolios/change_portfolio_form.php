@@ -23,7 +23,9 @@ $formName = 'change-portfolio-form-' . $portfolioId;
                             placeholder="Name"
                             class="change-portfolio-form-input custom-input"
                             value="<?php echo formTextValue('name', $formName, $portfolioName); ?>"
-
+                            minlength="6"
+                            maxlength="18"
+                            required
                     >
                 </label>
             </div>
