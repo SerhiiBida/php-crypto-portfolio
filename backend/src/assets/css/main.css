@@ -8,6 +8,7 @@ body {
 
 .main {
     flex: 1 1 auto;
+    background-color: var(--main-background-color);
 }
 
 .main-ml-256 {
@@ -370,4 +371,87 @@ body {
 
 .change-portfolio-form-delete-button {
     background-color: #F44336;
+}
+
+/*Страница "Портфель"*/
+.portfolio {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 400px auto;
+    grid-template-areas:
+        "chart add-coin"
+        "portfolio-coins portfolio-coins";
+    gap: 15px;
+    max-width: 1400px;
+    padding: 8px;
+    margin: 0 auto;
+}
+
+.add-coin-form {
+    grid-area: add-coin;
+}
+
+.chart {
+    grid-area: chart;
+}
+
+.portfolio-coins {
+    grid-area: portfolio-coins;
+}
+
+.add-coin-form,
+.chart,
+.portfolio-coins {
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background-color: #fff;
+}
+
+/*Форма добавления монеты в портфель*/
+.add-coin-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px 14px;
+}
+
+.add-coin-form-title {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    letter-spacing: 0.0125em;
+    font-family: "Roboto", sans-serif;
+    text-transform: none;
+    font-weight: 700;
+    text-align: center;
+    color: #2979FF;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.add-coin-form-select-coin select {
+    font-size: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    width: 100%;
+    padding: 16px 5px;
+    background-color: transparent;
+}
+
+.add-coin-form-input-amount input,
+.add-coin-form-input-money input {
+    padding: 18px 0;
+    width: 100%;
+    font-size: 18px;
+    background-color: transparent;
+}
+
+.add-coin-form-select-coin-error,
+.add-coin-form-input-amount-error,
+.add-coin-form-input-money-error {
+    padding-left: 5px;
+    font-size: 14px;
+    color: rgba(176, 0, 32);
+}
+
+.add-coin-form-submit {
+    width: 100%;
 }

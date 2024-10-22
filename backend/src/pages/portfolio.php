@@ -1,5 +1,7 @@
 <?php
 require '../../settings.php';
+// Обработчик формы добавления монет в портфель
+require_once __DIR__ . '/../components/portfolio/add_coin_handler.php';
 // HEAD
 require '../layouts/head.php';
 ?>
@@ -17,9 +19,11 @@ require '../layouts/header.php';
     ?>
 
     <section class="portfolio">
-        <h1>
-            <?php echo $_GET['page-id'] ?>
-        </h1>
+        <?php
+        require_once __DIR__ . '/../components/portfolio/chart.php';
+        require_once __DIR__ . '/../components/portfolio/add_coin_form.php';
+        require_once __DIR__ . '/../components/portfolio/portfolio_coins.php';
+        ?>
     </section>
 </main>
 

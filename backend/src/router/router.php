@@ -40,8 +40,10 @@ if ($currentPage === 'portfolio') {
 
     $portfoliosObj = new Portfolios();
 
+    $pageId = intval($_GET['page-id']);
+
     // Портфель не принадлежит пользователю
-    if (!$portfoliosObj->isRecordOwnedByUser($_GET['page-id'], $_SESSION['userId'])) {
+    if (!$portfoliosObj->isRecordOwnedByUser($pageId, $_SESSION['userId'])) {
         header('Location: ./portfolios.php');
         exit();
     }

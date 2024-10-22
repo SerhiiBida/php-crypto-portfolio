@@ -22,3 +22,15 @@
         z-index: 999;
     }
 }
+
+@media (max-width: 800px) {
+    .portfolio {
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(3, auto);
+        grid-template-areas:
+            "chart"
+            "add-coin"
+            "portfolio-coins";
+        gap: 10px;
+    }
+}
