@@ -377,7 +377,7 @@ body {
 .portfolio {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 400px auto;
+    grid-template-rows: 400px min-content;
     grid-template-areas:
         "chart add-coin"
         "portfolio-coins portfolio-coins";
@@ -454,4 +454,106 @@ body {
 
 .add-coin-form-submit {
     width: 100%;
+}
+
+/*Заголовок таблицы отображения монет портфеля*/
+.portfolio-coins-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
+
+.portfolio-coins-header-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.portfolio-coins-header-icon {
+    font-size: 39px;
+}
+
+/*Форма фильтрации, сортировки, поиска*/
+.portfolio-coins-filter-form {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 5px;
+}
+
+.portfolio-coins-filter-form-select-price select,
+.portfolio-coins-filter-form-select-sort select {
+    padding: 5px 5px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background-color: transparent;
+}
+
+.portfolio-coins-filter-form-input-name input {
+    padding: 6px 0;
+}
+
+.portfolio-coins-filter-form-submit {
+    margin-bottom: 0 !important;
+    padding: 2px 5px !important;
+    height: 30px;
+}
+
+/*Таблица отображения монет портфеля*/
+.portfolio-coins-table-wrapper {
+    width: 100%;
+    overflow: auto;
+}
+
+.portfolio-coins-table,
+.portfolio-coins-table tbody {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.portfolio-coins-table tr {
+    display: flex;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.portfolio-coins-table th,
+.portfolio-coins-table td {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 8px;
+    flex: 1;
+}
+
+
+.portfolio-coins-table th {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 8px;
+}
+
+.portfolio-coins-table-button {
+    background-color: rgba(176, 0, 32);
+    border: 2px solid rgba(176, 0, 32);
+    margin-bottom: 0;
+}
+
+/*Пагинация таблицы*/
+.portfolio-coins-pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 1px 8px 10px 8px;
+}
+
+.portfolio-coins-pagination a {
+    width: 70px;
+    margin-bottom: 0;
+    color: var(--main-text-color);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background-color: var(--main-background-color);
 }
