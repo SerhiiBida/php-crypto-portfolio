@@ -3,7 +3,9 @@
 $prices = [1 => 'default', '0 - 99 $', '100 - 499 $', '500 - 999 $', '1000 - 9999 $', '10000+ $'];
 
 // Сортировка
-$sorts = [1 => 'default', 'Name', 'Price', 'Holding', 'Avg. Buy Price', 'Profit/Loss', 'Invested'];
+$sorts = [1 => 'default', 'Name', 'Price', 'Avg. Buy Price', 'Profit/Loss', 'Invested'];
+
+require_once __DIR__ . '/'
 ?>
 <form
         action="<?php echo $_SERVER['PHP_SELF'] . '?page-id=' . $_GET['page-id']; ?>"

@@ -3,6 +3,7 @@
 namespace App\database\tables;
 
 use App\database\traits\ConnectTrait;
+use App\database\tables\utils\CoinPortfolioUtils;
 
 
 class CoinPortfolio
@@ -43,6 +44,50 @@ class CoinPortfolio
             echo 'Error: ' . $e->getMessage();
 
             return false;
+        }
+    }
+
+    // Получить все монеты в портфеле обычно или по фильтрации
+    public function getCoinsForPortfolio(
+        int    $portfolioId,
+        int    $userId,
+        string $searchName = null,
+        int    $sort = null,
+        int    $filterByPrice = null,
+        int    $limit = null,
+        int    $offset = null
+    ): ?array
+    {
+        try {
+            $sql = '
+                SELECT `coins`.`name`, `coins`.`symbol`, `coins`.`price`,
+                       (`coins`.`price` * SUM(`coins_amount`)) as real_price_investment,
+                       SUM(`coins_amount`) as amount,
+                       AVG(`money` / `coins_amount`) as average_buy_price,
+                       (((`coins`.`price` * SUM(`coins_amount`)) - SUM(`money`))) as profit,
+                       SUM(`money`) as investment
+                FROM `coin_portfolio`
+                    INNER JOIN `portfolios` ON `coin_portfolio`.`portfolio_id` = `portfolios`.`id`
+                    INNER JOIN `coins` ON `coin_portfolio`.`coin_id` = `coins`.`id`
+                WHERE `portfolio_id` = :portfolioId AND `portfolios`.`user_id` = :userId
+                GROUP BY `coins`.`id`
+            ';
+
+
+            // Куча кода...
+
+            $sth = $this->pdo->prepare($sql);
+
+            // В новый массив положить параметры не равные null и запихнуть его в execute()
+            $sth->execute([$portfolioId, $userId]);
+
+            // FETCH_ASSOC - вернуть как ассоциативные массивы
+            return $sth->fetchAll(\PDO::FETCH_ASSOC);
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return null;
         }
     }
 }
