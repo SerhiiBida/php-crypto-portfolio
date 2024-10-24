@@ -85,6 +85,10 @@ class CoinPortfolio
             // Ограничения
             $sql .= CoinPortfolioUtils::getSqlLimitAndOffset($limit, $offset);
 
+            echo $sql . '<br>';
+            echo $limit . '<br>';
+            echo $offset . '<br>';
+
             $sth = $this->pdo->prepare($sql);
 
             // Получаем параметры для вставки

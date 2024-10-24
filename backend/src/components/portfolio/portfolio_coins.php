@@ -40,8 +40,6 @@ function getTotalPages(int $limit): int
         return 0;
     }
 
-    echo var_dump($coinsAmountArray) . '<br>';
-
     $coinsAmount = $coinsAmountArray[0];
 
     if ($coinsAmount < 1) {
@@ -70,12 +68,12 @@ function pagination(): bool
     // Всего страниц
     $totalPages = getTotalPages($limit);
 
-    if ($totalPages < 2 || $paginationPage > $totalPages) {
+    if ($paginationPage > $totalPages) {
         return false;
     }
 
     // Пропуск записей не текущей страницы
-    $offset = ($paginationPage - 1) * $limit;
+    $offset = intval(($paginationPage - 1) * $limit);
 
     [$portfolioId, $userId, $searchName, $sort, $filterPrice] = getDataSetting();
 
