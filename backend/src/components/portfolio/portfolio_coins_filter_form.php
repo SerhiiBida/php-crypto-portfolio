@@ -1,11 +1,40 @@
 <?php
 // Фильтрация
-$prices = [1 => 'default', '0 - 99 $', '100 - 499 $', '500 - 999 $', '1000 - 9999 $', '10000+ $'];
+$prices = [
+    'default' => 'default',
+    '0-99' => '0 - 99 $',
+    '100-499' => '100 - 499 $',
+    '500-999' => '500 - 999 $',
+    '1000-9999' => '1000 - 9999 $',
+    '10000+' => '10000+ $'
+];
 
 // Сортировка
-$sorts = [1 => 'default', 'Name', 'Price', 'Avg. Buy Price', 'Profit/Loss', 'Invested'];
+$sorts = [
+    'default' => 'default',
+    'name' => 'Name',
+    'price' => 'Price',
+    'average-buy-price' => 'Avg. Buy Price',
+    'profit' => 'Profit/Loss',
+    'investment' => 'Investment'
+];
 
-require_once __DIR__ . '/'
+// Вывод старых значений
+function portfolioCoinsSelectValue(string $fieldName, string $value): string
+{
+    $oldValue = null;
+
+    if ($fieldName === 'filter-price') {
+        $oldValue = $_SESSION['portfolio']['filterPrice'] ?? null;
+    }
+
+    if ($fieldName === 'sort') {
+        $oldValue = $_SESSION['portfolio']['sort'] ?? null;
+    }
+
+    return $oldValue === $value ? 'selected' : '';
+}
+
 ?>
 <form
         action="<?php echo $_SERVER['PHP_SELF'] . '?page-id=' . $_GET['page-id']; ?>"
@@ -15,11 +44,11 @@ require_once __DIR__ . '/'
     <div class="portfolio-coins-filter-form-select-price">
         <label>
             Prices:
-            <select id="price" name="price">
+            <select id="filter-price" name="filter-price">
                 <?php foreach ($prices as $key => $price): ?>
                     <option
                             value="<?php echo $key ?>"
-                        <?php echo formSelectValue('price', $key); ?>
+                        <?php echo portfolioCoinsSelectValue('filter-price', $key); ?>
                     >
                         <?php echo $price ?>
                     </option>
@@ -34,7 +63,7 @@ require_once __DIR__ . '/'
                 <?php foreach ($sorts as $key => $sort): ?>
                     <option
                             value="<?php echo $key ?>"
-                        <?php echo formSelectValue('sort', $key); ?>
+                        <?php echo portfolioCoinsSelectValue('sort', $key); ?>
                     >
                         <?php echo $sort ?>
                     </option>
@@ -46,9 +75,9 @@ require_once __DIR__ . '/'
         <label>
             <input
                     type="text"
-                    name="name"
+                    name="search-name"
                     placeholder="Name"
-                    value="<?php echo formTextValue('name', 'portfolio-coins-filter-form'); ?>"
+                    value="<?php echo $_SESSION['portfolio']['searchName'] ?? ''; ?>"
                     min="0"
             >
         </label>

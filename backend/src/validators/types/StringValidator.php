@@ -10,9 +10,9 @@ class StringValidator implements TypeValidatorInterface
     /**
      * Валидатор для строк, input[type="text"]
      */
-    public static function validate(string $fieldName, $value, array &$errors): bool
+    public static function validate(string $fieldName, $value, array &$errors, $peculiarity = null): bool
     {
-        if (empty($value) || trim(strval($value)) === '') {
+        if ($peculiarity !== 'empty' && (empty($value) || trim(strval($value)) === '')) {
             $errors[$fieldName] = 'Cannot be empty';
 
             return false;

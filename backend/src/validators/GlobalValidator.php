@@ -47,7 +47,9 @@ class GlobalValidator extends GlobalValidatorAbstract
         // Основная валидация
         foreach ($this->fields as $fieldName => $data) {
             if ($data['type'] === 'str') {
-                $check = !StringValidator::validate($fieldName, $data['value'], $this->errors) ? false : $check;
+                $peculiarity = $data['peculiarity'] ?? null;
+
+                $check = !StringValidator::validate($fieldName, $data['value'], $this->errors, $peculiarity) ? false : $check;
             }
 
             if ($data['type'] === 'int') {

@@ -1,6 +1,20 @@
 <?php
-// Обработка фильтрации, сортировки, поиска
+
+use App\database\tables\CoinPortfolio;
+
+// Обработчик формы фильтрации, сортировки, поиска
+require_once __DIR__ . '/portfolio_coins_filter_handler.php';
+
+// Данные из формы фильтрации, сортировки, поиска
+$filterPrice = $_SESSION['portfolio']['filterPrice'] ?? null;
+$sort = $_SESSION['portfolio']['sort'] ?? null;
+$searchName = $_SESSION['portfolio']['searchName'] ?? null;
+
+// Получение данных из БД
+$coinPortfolio = new CoinPortfolio();
+
 // Пагинация
+echo json_encode($_SESSION) . '<br>';
 ?>
 <section class="portfolio-coins">
     <div class="portfolio-coins-header">
@@ -33,7 +47,7 @@
                     Profit/Loss
                 </th>
                 <th>
-                    Invested
+                    Investment
                 </th>
                 <th>
                     Actions
