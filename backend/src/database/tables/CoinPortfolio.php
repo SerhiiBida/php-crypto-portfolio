@@ -52,8 +52,8 @@ class CoinPortfolio
         int    $portfolioId,
         int    $userId,
         string $searchName = null,
-        int    $sort = null,
-        int    $filterByPrice = null,
+        string $sort = null,
+        string $filterByPrice = null,
         int    $limit = null,
         int    $offset = null
     ): ?array
@@ -109,5 +109,50 @@ class CoinPortfolio
     }
 
     // Получить количество разных монет в портфеле(обычно или по фильтрации)
-    // ...
+    public function getCountCoinsForPortfolio(
+        int    $portfolioId,
+        int    $userId,
+        string $searchName = null,
+        string $filterByPrice = null
+    ): ?array
+    {
+        try {
+            $additionalSql = '
+                SELECT `coins`.`id`
+                FROM `coin_portfolio`
+                    INNER JOIN `portfolios` ON `coin_portfolio`.`portfolio_id` = `portfolios`.`id`
+                    INNER JOIN `coins` ON `coin_portfolio`.`coin_id` = `coins`.`id`
+            ';
+
+            // Условие, фильтрация, поиск
+            $additionalSql .= ' WHERE `portfolio_id` = ? AND `portfolios`.`user_id` = ?'
+                . CoinPortfolioUtils::getSqlFilter($filterByPrice)
+                . CoinPortfolioUtils::getSqlSearch($searchName);
+
+            // Группировка
+            $additionalSql .= ' GROUP BY `coins`.`id`';
+
+            // Запрос
+            $sql = "SELECT COUNT(*) FROM ($additionalSql) AS subquery";
+
+            $sth = $this->pdo->prepare($sql);
+
+            // Получаем параметры для вставки
+            $params = CoinPortfolioUtils::getParams([
+                $portfolioId,
+                $userId,
+                $searchName,
+            ]);
+
+            $sth->execute($params);
+
+            // FETCH_ASSOC - вернуть значение одного столбца в виде массива
+            return $sth->fetchAll(\PDO::FETCH_COLUMN);
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return null;
+        }
+    }
 }

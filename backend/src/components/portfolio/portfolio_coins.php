@@ -5,21 +5,101 @@ use App\database\tables\CoinPortfolio;
 // Обработчик формы фильтрации, сортировки, поиска
 require_once __DIR__ . '/portfolio_coins_filter_handler.php';
 
-// Данные из формы фильтрации, сортировки, поиска
-$filterPrice = $_SESSION['portfolio']['filterPrice'] ?? null;
-$sort = $_SESSION['portfolio']['sort'] ?? null;
-$searchName = $_SESSION['portfolio']['searchName'] ?? null;
-
-// Пагинация
-
-// Получение данных из БД
 $coinPortfolio = new CoinPortfolio();
 
-$portfolioId = $_GET['page-id'];
-$userId = $_SESSION['userId'];
+// Данные для поиска
+function getDataSetting(): array
+{
+    $portfolioId = intval($_GET['page-id']);
+    $userId = $_SESSION['userId'];
 
-$coinsData = $coinPortfolio->getCoinsForPortfolio($portfolioId, $userId);
+    // Данные из формы фильтрации, сортировки, поиска
+    $filterPrice = $_SESSION['portfolio']['filterPrice'] ?? null;
+    $sort = $_SESSION['portfolio']['sort'] ?? null;
+    $searchName = $_SESSION['portfolio']['searchName'] ?? null;
 
+    return [
+        $portfolioId,
+        $userId,
+        $searchName,
+        $sort,
+        $filterPrice
+    ];
+}
+
+// Количество страниц
+function getTotalPages(int $limit): int
+{
+    global $coinPortfolio;
+
+    [$portfolioId, $userId, $searchName, $sort, $filterPrice] = getDataSetting();
+
+    $coinsAmountArray = $coinPortfolio->getCountCoinsForPortfolio($portfolioId, $userId, $searchName, $filterPrice);
+
+    if (is_null($coinsAmountArray)) {
+        return 0;
+    }
+
+    echo var_dump($coinsAmountArray) . '<br>';
+
+    $coinsAmount = $coinsAmountArray[0];
+
+    if ($coinsAmount < 1) {
+        return 0;
+    }
+
+    return ceil($coinsAmount / $limit);
+}
+
+// Пагинация
+function pagination(): bool
+{
+    global $coinPortfolio, $coinsData, $paginationPage, $totalPages;
+
+    $coinsData = [];
+
+    $limit = 5;
+
+    // Текущая страница
+    $paginationPage = intval($_GET['pagination-page'] ?? 1);
+
+    if ($paginationPage < 1) {
+        return false;
+    }
+
+    // Всего страниц
+    $totalPages = getTotalPages($limit);
+
+    if ($totalPages < 2 || $paginationPage > $totalPages) {
+        return false;
+    }
+
+    // Пропуск записей не текущей страницы
+    $offset = ($paginationPage - 1) * $limit;
+
+    [$portfolioId, $userId, $searchName, $sort, $filterPrice] = getDataSetting();
+
+    // Получение данных
+    $coinsData = $coinPortfolio->getCoinsForPortfolio(
+        $portfolioId,
+        $userId,
+        $searchName,
+        $sort,
+        $filterPrice,
+        $limit,
+        $offset
+    );
+
+    if (is_null($coinsData)) {
+        $coinsData = [];
+
+        return false;
+    }
+
+    return true;
+}
+
+$isPagination = pagination();
 ?>
 <section class="portfolio-coins">
     <div class="portfolio-coins-header">
@@ -97,15 +177,18 @@ $coinsData = $coinPortfolio->getCoinsForPortfolio($portfolioId, $userId);
             <?php endif; ?>
         </table>
     </div>
-    <div class="portfolio-coins-pagination">
-        <a href="#" class="submit-btn">
-            <
-        </a>
-        <a href="#" class="submit-btn">
-            >
-        </a>
-        <p>
-            1 of 2 pages
-        </p>
-    </div>
+    <!--Пагинация-->
+    <?php if ($isPagination): ?>
+        <div class="portfolio-coins-pagination">
+            <a href="#" class="submit-btn">
+                <
+            </a>
+            <a href="#" class="submit-btn">
+                >
+            </a>
+            <p>
+                1 of 2 pages
+            </p>
+        </div>
+    <?php endif; ?>
 </section>

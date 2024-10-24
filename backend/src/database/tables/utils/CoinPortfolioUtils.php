@@ -25,7 +25,7 @@ class CoinPortfolioUtils
 
     public static function getSqlSearch(string $searchName = null): string
     {
-        if (is_null($searchName)) {
+        if (!$searchName) {
             return '';
         }
 
@@ -62,7 +62,7 @@ class CoinPortfolioUtils
     public static function getParams(array $params): array
     {
         return array_values(array_filter($params, function ($value) {
-            return $value !== null;
+            return $value !== null && $value !== '';
         }));
     }
 }
