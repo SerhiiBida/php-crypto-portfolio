@@ -7,23 +7,62 @@ use App\database\tables\CoinPortfolio;
 
 class CoinPortfolioUtils
 {
-    public static function getSqlFilter(int $filterByPrice = null): string
+    public static function getSqlFilter(string $filterByPrice = null): string
     {
+        if (is_null($filterByPrice)) {
+            return '';
+        }
 
-    }
-
-    public static function getSqlSort(int $sort = null): string
-    {
-
+        return match ($filterByPrice) {
+            '0-99' => ' AND `coins`.`price` BETWEEN 0 AND 99',
+            '100-499' => ' AND `coins`.`price` BETWEEN 100 AND 499',
+            '500-999' => ' AND `coins`.`price` BETWEEN 500 AND 999',
+            '1000-9999' => ' AND `coins`.`price` BETWEEN 1000 AND 9999',
+            '10000+' => ' AND `coins`.`price` >= 10000',
+            default => ''
+        };
     }
 
     public static function getSqlSearch(string $searchName = null): string
     {
+        if (is_null($searchName)) {
+            return '';
+        }
 
+        return ' AND `coins`.`name` LIKE ?';
+    }
+
+    public static function getSqlSort(string $sort = null): string
+    {
+        if (is_null($sort)) {
+            return '';
+        }
+
+        return match ($sort) {
+            'name' => ' ORDER BY `coins`.`name`',
+            'price' => ' ORDER BY `coins`.`price`',
+            'average-buy-price' => ' ORDER BY `average_buy_price`',
+            'profit' => ' ORDER BY `profit`',
+            'investment' => ' ORDER BY `investment`',
+            default => ''
+        };
     }
 
     public static function getSqlLimitAndOffset(int $limit = null, int $offset = null): string
     {
+        if (is_null($limit)) {
+            return '';
+        }
 
+        $limitSql = ' LIMIT ?';
+
+        return $offset !== null ? $limitSql . ' OFFSET ?' : $limitSql;
+    }
+
+    public static function getParams(array $params): array
+    {
+        return array_values(array_filter($params, function ($value) {
+            return $value !== null;
+        }));
     }
 }

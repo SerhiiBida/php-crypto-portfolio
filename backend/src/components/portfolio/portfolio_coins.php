@@ -10,11 +10,11 @@ $filterPrice = $_SESSION['portfolio']['filterPrice'] ?? null;
 $sort = $_SESSION['portfolio']['sort'] ?? null;
 $searchName = $_SESSION['portfolio']['searchName'] ?? null;
 
+// Пагинация
+
 // Получение данных из БД
 $coinPortfolio = new CoinPortfolio();
 
-// Пагинация
-echo json_encode($_SESSION) . '<br>';
 ?>
 <section class="portfolio-coins">
     <div class="portfolio-coins-header">

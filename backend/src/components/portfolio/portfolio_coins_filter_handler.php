@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['portfolio-coins-filte
         // Сохраняем настройки фильтрации, сортировки, поиска
         $filterPrice = $_SESSION['portfolio']['filterPrice'] = trim($_POST['filter-price']);
         $sort = $_SESSION['portfolio']['sort'] = trim($_POST['sort']);
-        $searchName = $_SESSION['portfolio']['searchName'] = trim($_POST['search-name']);
+        $searchName = $_SESSION['portfolio']['searchName'] = '%' . trim($_POST['search-name']) . '%';
 
     } else {
         // Обнуляем фильтрацию

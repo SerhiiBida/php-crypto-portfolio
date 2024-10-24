@@ -69,17 +69,34 @@ class CoinPortfolio
                 FROM `coin_portfolio`
                     INNER JOIN `portfolios` ON `coin_portfolio`.`portfolio_id` = `portfolios`.`id`
                     INNER JOIN `coins` ON `coin_portfolio`.`coin_id` = `coins`.`id`
-                WHERE `portfolio_id` = :portfolioId AND `portfolios`.`user_id` = :userId
-                GROUP BY `coins`.`id`
             ';
 
+            // Условие, фильтрация, поиск
+            $sql .= ' WHERE `portfolio_id` = ? AND `portfolios`.`user_id` = ?'
+                . CoinPortfolioUtils::getSqlFilter($filterByPrice)
+                . CoinPortfolioUtils::getSqlSearch($searchName);
 
-            // Куча кода...
+            // Группировка
+            $sql .= ' GROUP BY `coins`.`id`';
+
+            // Сортировка
+            $sql .= CoinPortfolioUtils::getSqlSort($sort);
+
+            // Ограничения
+            $sql .= CoinPortfolioUtils::getSqlLimitAndOffset($limit, $offset);
 
             $sth = $this->pdo->prepare($sql);
 
-            // В новый массив положить параметры не равные null и запихнуть его в execute()
-            $sth->execute([$portfolioId, $userId]);
+            // Получаем параметры для вставки
+            $params = CoinPortfolioUtils::getParams([
+                $portfolioId,
+                $userId,
+                $searchName,
+                $limit,
+                $offset
+            ]);
+
+            $sth->execute($params);
 
             // FETCH_ASSOC - вернуть как ассоциативные массивы
             return $sth->fetchAll(\PDO::FETCH_ASSOC);
@@ -92,41 +109,5 @@ class CoinPortfolio
     }
 
     // Получить количество разных монет в портфеле(обычно или по фильтрации)
-    public function getCountCoinsForPortfolio(
-        int    $portfolioId,
-        int    $userId,
-        string $searchName = null,
-        int    $sort = null,
-        int    $filterByPrice = null,
-        int    $limit = null,
-        int    $offset = null
-    ): ?array
-    {
-        try {
-            $sql = '
-                SELECT COUNT(*)
-                FROM `coin_portfolio`
-                    INNER JOIN `portfolios` ON `coin_portfolio`.`portfolio_id` = `portfolios`.`id`
-                    INNER JOIN `coins` ON `coin_portfolio`.`coin_id` = `coins`.`id`
-                WHERE `portfolio_id` = :portfolioId AND `portfolios`.`user_id` = :userId
-                GROUP BY `coins`.`id`
-            ';
-
-
-            // Куча кода...
-
-            $sth = $this->pdo->prepare($sql);
-
-            // В новый массив положить параметры не равные null и запихнуть его в execute()
-            $sth->execute([$portfolioId, $userId]);
-
-            // FETCH_ASSOC - вернуть как ассоциативные массивы
-            return $sth->fetchAll(\PDO::FETCH_ASSOC);
-
-        } catch (\PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
-
-            return null;
-        }
-    }
+    // ...
 }
