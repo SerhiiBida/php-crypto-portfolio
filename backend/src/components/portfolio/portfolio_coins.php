@@ -15,6 +15,11 @@ $searchName = $_SESSION['portfolio']['searchName'] ?? null;
 // Получение данных из БД
 $coinPortfolio = new CoinPortfolio();
 
+$portfolioId = $_GET['page-id'];
+$userId = $_SESSION['userId'];
+
+$coinsData = $coinPortfolio->getCoinsForPortfolio($portfolioId, $userId);
+
 ?>
 <section class="portfolio-coins">
     <div class="portfolio-coins-header">
@@ -53,33 +58,43 @@ $coinPortfolio = new CoinPortfolio();
                     Actions
                 </th>
             </tr>
-            <tr>
-                <td>
-                    Bitcoin
-                </td>
-                <td>
-                    65450 $
-                </td>
-                <td>
-                    345.567 $
-                    <br>
-                    0.000006 btc
-                </td>
-                <td>
-                    25560 $
-                </td>
-                <td>
-                    -78 $
-                </td>
-                <td>
-                    1200 $
-                </td>
-                <td>
-                    <button class="portfolio-coins-table-button submit-btn">
-                        DELETE
-                    </button>
-                </td>
-            </tr>
+            <?php foreach ($coinsData as $coin): ?>
+                <tr>
+                    <td>
+                        <?php echo $coin['name'] ?>
+                    </td>
+                    <td>
+                        <?php echo (float)$coin['price'] . ' $' ?>
+                    </td>
+                    <td>
+                        <?php echo (float)$coin['real_price_investment'] . ' $' ?>
+                        <br>
+                        <?php echo (float)$coin['amount'] . " {$coin['symbol']}" ?>
+                    </td>
+                    <td>
+                        <?php echo (float)$coin['average_buy_price'] . ' $' ?>
+                    </td>
+                    <td>
+                        <?php echo (float)$coin['profit'] . ' $' ?>
+                    </td>
+                    <td>
+                        <?php echo (float)$coin['investment'] . ' $' ?>
+                    </td>
+                    <td>
+                        <button class="portfolio-coins-table-button submit-btn">
+                            DELETE
+                        </button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            <!--Если пусто-->
+            <?php if (empty($coinsData)): ?>
+                <tr>
+                    <td colspan="7">
+                        No data available
+                    </td>
+                </tr>
+            <?php endif; ?>
         </table>
     </div>
     <div class="portfolio-coins-pagination">
