@@ -58,6 +58,10 @@ class CoinPortfolio
         int    $offset = null
     ): ?array
     {
+        if (is_string($searchName) && $searchName !== '') {
+            $searchName = "%$searchName%";
+        }
+
         try {
             $sql = '
                 SELECT `coins`.`name`, `coins`.`symbol`, `coins`.`price`,
@@ -116,6 +120,10 @@ class CoinPortfolio
         string $filterByPrice = null
     ): ?array
     {
+        if (is_string($searchName) && $searchName !== '') {
+            $searchName = "%$searchName%";
+        }
+
         try {
             $additionalSql = '
                 SELECT `coins`.`id`
