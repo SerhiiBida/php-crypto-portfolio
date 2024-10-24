@@ -7,6 +7,13 @@
     display: block !important;
 }
 
+.disabled-link {
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+    color: gray !important;
+    text-decoration: none !important;
+}
+
 /*Ошибки*/
 .border-error {
     border-color: rgba(176, 0, 32) !important;

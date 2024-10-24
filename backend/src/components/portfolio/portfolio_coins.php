@@ -49,6 +49,47 @@ function getTotalPages(int $limit): int
     return ceil($coinsAmount / $limit);
 }
 
+function nextPageLink(): string
+{
+    global $paginationPage;
+
+    $pageId = $_GET['page-id'];
+    $nextPage = $paginationPage + 1;
+
+    $params = "?page-id=$pageId&pagination-page=$nextPage";
+
+    return $_SERVER['PHP_SELF'] . $params;
+}
+
+function prevPageLink(): string
+{
+    global $paginationPage;
+
+    $pageId = $_GET['page-id'];
+    $nextPage = $paginationPage - 1;
+
+    $params = "?page-id=$pageId&pagination-page=$nextPage";
+
+    return $_SERVER['PHP_SELF'] . $params;
+}
+
+function isPage(bool $isNext): bool
+{
+    global $paginationPage, $totalPages;
+
+    if ($isNext) {
+        $newPage = $paginationPage + 1;
+    } else {
+        $newPage = $paginationPage - 1;
+    }
+
+    if ($newPage <= $totalPages && $newPage > 0) {
+        return true;
+    }
+
+    return false;
+}
+
 // Пагинация
 function pagination(): bool
 {
@@ -61,15 +102,18 @@ function pagination(): bool
     // Текущая страница
     $paginationPage = intval($_GET['pagination-page'] ?? 1);
 
-    if ($paginationPage < 1) {
-        return false;
-    }
-
     // Всего страниц
     $totalPages = getTotalPages($limit);
 
-    if ($paginationPage > $totalPages) {
+    if (!$totalPages) {
+        $coinsData = [];
+
         return false;
+    }
+
+    if ($paginationPage < 1 || $paginationPage > $totalPages) {
+        $paginationPage = 1;
+        $_GET['pagination-page'] = 1;
     }
 
     // Пропуск записей не текущей страницы
@@ -178,14 +222,20 @@ $isPagination = pagination();
     <!--Пагинация-->
     <?php if ($isPagination): ?>
         <div class="portfolio-coins-pagination">
-            <a href="#" class="submit-btn">
+            <a
+                    href="<?php echo prevPageLink(); ?>"
+                    class="submit-btn <?php echo isPage(false) ? '' : 'disabled-link'; ?>"
+            >
                 <
             </a>
-            <a href="#" class="submit-btn">
+            <a
+                    href="<?php echo nextPageLink(); ?>"
+                    class="submit-btn <?php echo isPage(true) ? '' : 'disabled-link'; ?>"
+            >
                 >
             </a>
             <p>
-                1 of 2 pages
+                <?php echo "$paginationPage of $totalPages pages" ?>
             </p>
         </div>
     <?php endif; ?>
