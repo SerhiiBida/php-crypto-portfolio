@@ -85,22 +85,18 @@ class CoinPortfolio
             // Ограничения
             $sql .= CoinPortfolioUtils::getSqlLimitAndOffset($limit, $offset);
 
-            echo $sql . '<br>';
-            echo $limit . '<br>';
-            echo $offset . '<br>';
-
             $sth = $this->pdo->prepare($sql);
 
-            // Получаем параметры для вставки
-            $params = CoinPortfolioUtils::getParams([
+            // Устанавливаем параметры
+            CoinPortfolioUtils::setParameters([
                 $portfolioId,
                 $userId,
                 $searchName,
                 $limit,
                 $offset
-            ]);
+            ], $sth);
 
-            $sth->execute($params);
+            $sth->execute();
 
             // FETCH_ASSOC - вернуть как ассоциативные массивы
             return $sth->fetchAll(\PDO::FETCH_ASSOC);
@@ -141,14 +137,14 @@ class CoinPortfolio
 
             $sth = $this->pdo->prepare($sql);
 
-            // Получаем параметры для вставки
-            $params = CoinPortfolioUtils::getParams([
+            // Устанавливаем параметры
+            CoinPortfolioUtils::setParameters([
                 $portfolioId,
                 $userId,
                 $searchName,
-            ]);
+            ], $sth);
 
-            $sth->execute($params);
+            $sth->execute();
 
             // FETCH_ASSOC - вернуть значение одного столбца в виде массива
             return $sth->fetchAll(\PDO::FETCH_COLUMN);

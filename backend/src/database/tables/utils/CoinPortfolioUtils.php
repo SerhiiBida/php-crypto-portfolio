@@ -59,10 +59,30 @@ class CoinPortfolioUtils
         return $offset !== null ? $limitSql . ' OFFSET ?' : $limitSql;
     }
 
-    public static function getParams(array $params): array
+    public static function setParameters(array $params, &$sth): bool
     {
-        return array_values(array_filter($params, function ($value) {
+        // Получаем не пустые параметры
+        $filterParams = array_values(array_filter($params, function ($value) {
             return $value !== null && $value !== '';
         }));
+
+        try {
+            // Добавляем в запрос параметры
+            foreach ($filterParams as $index => $value) {
+                if (is_int($value)) {
+                    $sth->bindValue($index + 1, $value, \PDO::PARAM_INT);
+
+                } else {
+                    $sth->bindValue($index + 1, $value, \PDO::PARAM_STR);
+                }
+            }
+
+            return true;
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return false;
+        }
     }
 }
