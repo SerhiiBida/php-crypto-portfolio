@@ -5,10 +5,22 @@ use App\components\auth\Auth;
 
 // Если авторизован, то создаем сессию
 if (isset($_COOKIE['auth']) && isset($_COOKIE['PHPSESSID'])) {
+    $oldSessionId = $_COOKIE['PHPSESSID'];
+
     session_start();
+
+    // Совпадает ли в куках и в сессии id сессии
+    if (session_id() !== $oldSessionId) {
+        // Данные сессии неправдивые
+        setcookie('auth', '', time(), '/');
+        $_COOKIE['auth'] = null;
+
+        session_destroy();
+    }
+
 } else {
     // Очищаем старые данные
-    setcookie('auth', null, time(), '/');
+    setcookie('auth', '', time(), '/');
     $_COOKIE['auth'] = null;
 }
 
