@@ -50,6 +50,16 @@ require __DIR__ . '/display_auth_errors.php';
     <p class="login-form-password-error custom-input-error">
         <?php echo getFieldError('password'); ?>
     </p>
+    <div class="login-form-terms">
+        <label>
+            <input
+                    type="checkbox"
+                    name="terms"
+                <?php echo formRadioCheckboxValue('terms', 'on'); ?>
+            >
+            Remember me
+        </label>
+    </div>
     <p class="auth-error">
         <?php echo getAuthError(); ?>
     </p>

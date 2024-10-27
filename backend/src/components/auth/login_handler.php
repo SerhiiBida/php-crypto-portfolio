@@ -50,8 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data['username'] = trim($_POST['username']);
         $data['password'] = trim($_POST['password']);
 
+        // Запомнить ли пользователя
+        if (isset($_POST['terms']) && $_POST['terms'] == 'on') {
+            $rememberMe = true;
+        } else {
+            $rememberMe = false;
+        }
+
         // Авторизовываем пользователя
-        $check = Auth::login($data, $formErrors);
+        $check = Auth::login($data, $formErrors, $rememberMe);
 
         if ($check) {
             // Перенаправляем на страницу с портфелями

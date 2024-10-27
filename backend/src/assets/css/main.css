@@ -270,6 +270,11 @@ body {
     text-align: center;
 }
 
+.login-form-terms {
+    display: flex;
+    justify-content: center;
+}
+
 /*Страница "Портфели"*/
 .portfolios {
     display: flex;
@@ -376,14 +381,14 @@ body {
 /*Страница "Портфель"*/
 .portfolio {
     display: grid;
-    grid-template-columns: 65% 35%;
+    grid-template-columns: 65% 34%;
     grid-template-rows: 400px min-content;
     grid-template-areas:
         "chart add-coin"
         "portfolio-coins portfolio-coins";
     gap: 15px;
     max-width: 1400px;
-    padding: 8px;
+    padding: 1%;
     margin: 0 auto;
 }
 

@@ -12,6 +12,32 @@ class Auth
     /**
      * Авторизация и регистрация пользователя
      */
+    public static function getNewRandomToken(): string
+    {
+        $usersDb = new Users();
+
+        // Выполнять, пока токен не будет уникальный
+        do {
+            $token = bin2hex(random_bytes(32));
+
+            $isToken = $usersDb->isToken($token);
+        } while ($isToken);
+
+        return $token;
+    }
+
+    public static function rememberUser(array $user): void
+    {
+        $token = Auth::getNewRandomToken();
+
+        $usersDb = new Users();
+
+        // Сохраняем токен в БД и Cookie
+        if ($usersDb->addToken($user['id'], $token)) {
+            setcookie('token', $token, time() + 2592000, '/'); // 30 дней
+        }
+    }
+
     public static function saveUserInCookie(string $userId, string $username): void
     {
         $sessionTime = (int)getenv('SESSION_TIME');
@@ -71,7 +97,7 @@ class Auth
         return true;
     }
 
-    public static function login(array $data, array &$errors): bool
+    public static function login(array $data, array &$errors, bool $rememberMe = false): bool
     {
         // Есть ли такой username
         $users = new Users();
@@ -112,6 +138,11 @@ class Auth
             $errors['auth'] = 'Incorrect username or password';
 
             return false;
+        }
+
+        if ($rememberMe) {
+            // Запоминаем пользователя на 30 дней
+            Auth::rememberUser($user);
         }
 
         // Авторизация в cookie и session
