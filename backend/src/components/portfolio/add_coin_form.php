@@ -47,6 +47,8 @@ if (is_null($coinsData)) {
                     name="amount"
                     placeholder="Amount of coins"
                     value="<?php echo formTextValue('amount', 'add-coin-form'); ?>"
+                    step="0.000000001"
+                    min="0.000000001"
                     required
             >
         </label>
@@ -63,6 +65,8 @@ if (is_null($coinsData)) {
                     name="money"
                     placeholder="Investments, $"
                     value="<?php echo formTextValue('money', 'add-coin-form'); ?>"
+                    step="0.00001"
+                    min="0.00001"
                     required
             >
         </label>
