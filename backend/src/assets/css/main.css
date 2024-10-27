@@ -536,7 +536,8 @@ body {
     padding: 10px 8px;
 }
 
-.portfolio-coins-table-button {
+/*Форма удаления монет*/
+.delete-coins-form-button {
     background-color: rgba(176, 0, 32);
     border: 2px solid rgba(176, 0, 32);
     margin-bottom: 0;

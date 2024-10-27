@@ -2,6 +2,8 @@
 
 use App\database\tables\CoinPortfolio;
 
+// Удаление монеты
+require_once __DIR__ . "/delete_coins_handler.php";
 // Обработчик формы фильтрации, сортировки, поиска
 require_once __DIR__ . '/portfolio_coins_filter_handler.php';
 
@@ -203,9 +205,9 @@ $isPagination = pagination();
                         <?php echo (float)$coin['investment'] . ' $' ?>
                     </td>
                     <td>
-                        <button class="portfolio-coins-table-button submit-btn">
-                            DELETE
-                        </button>
+                        <!--Форма удаления монеты-->
+
+                        <?php require __DIR__ . '/delete_coins_form.php'; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

@@ -47,6 +47,36 @@ class CoinPortfolio
         }
     }
 
+    // Удалить все записи монеты из портфеля
+    public function deleteCoinFromPortfolio(int $portfolioId, int $userId, int $coinId): bool
+    {
+        try {
+            $sql = '
+                DELETE cp
+                FROM `coin_portfolio` AS cp
+                INNER JOIN `portfolios` AS p ON p.`id` = cp.`portfolio_id`
+                WHERE cp.`portfolio_id` = ?
+                AND cp.`coin_id` = ?
+                AND p.`user_id` = ?;
+            ';
+
+            $sth = $this->pdo->prepare($sql);
+
+            $sth->bindValue(1, $portfolioId, \PDO::PARAM_INT);
+            $sth->bindValue(2, $coinId, \PDO::PARAM_INT);
+            $sth->bindValue(3, $userId, \PDO::PARAM_INT);
+
+            $sth->execute();
+
+            return true;
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return false;
+        }
+    }
+
     // Получить все монеты в портфеле(обычно или по фильтрации)
     public function getCoinsForPortfolio(
         int    $portfolioId,
@@ -64,7 +94,7 @@ class CoinPortfolio
 
         try {
             $sql = '
-                SELECT `coins`.`name`, `coins`.`symbol`, `coins`.`price`,
+                SELECT `coins`.`id`, `coins`.`name`, `coins`.`symbol`, `coins`.`price`,
                        (`coins`.`price` * SUM(`coins_amount`)) as real_price_investment,
                        SUM(`coins_amount`) as amount,
                        AVG(`money` / `coins_amount`) as average_buy_price,
