@@ -376,7 +376,7 @@ body {
 /*Страница "Портфель"*/
 .portfolio {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 65% 35%;
     grid-template-rows: 400px min-content;
     grid-template-areas:
         "chart add-coin"
