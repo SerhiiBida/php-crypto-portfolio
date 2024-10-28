@@ -16,8 +16,8 @@ if (!empty($_COOKIE['auth'])) {
 }
 ?>
 <!--Меню-->
-<div class="menu-mobile-background show"></div>
-<nav class="menu show">
+<div class="menu-mobile-background"></div>
+<nav class="menu">
     <ol class="menu-list">
         <?php if (empty($_COOKIE['auth'])): ?>
             <a href="/src/pages/login.php" class="menu-item">
