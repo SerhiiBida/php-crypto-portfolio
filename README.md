@@ -15,3 +15,16 @@ docker-compose down -v - удалить все сети и тома(volumes, д�
 
 Особенности:  
 composer dump-autoload - запуск внутри контейнера php для обновления namespace
+
+## User authorization
+
+![img.png](backend/src/assets/images/readme/auth.png)
+
+## Portfolio management
+
+![img.png](backend/src/assets/images/readme/portfolios-management.png)
+
+## User's portfolio
+
+![img.png](backend/src/assets/images/readme/portfolio.png)
+
