@@ -33,4 +33,22 @@
             "portfolio-coins";
         gap: 10px;
     }
+
+    .add-coin-form {
+        gap: 5px;
+    }
+
+    .portfolio-coins-header {
+        flex-direction: column;
+        gap: 5px
+    }
+
+    /*Форма сортировки и поиска*/
+    .portfolio-coins-filter-form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
 }

@@ -112,6 +112,7 @@ body {
 .main > section {
     flex: 1 1 auto;
     height: 100%;
+    width: 100%;
     background-color: var(--main-background-color)
 }
 
@@ -508,12 +509,12 @@ body {
 /*Таблица отображения монет портфеля*/
 .portfolio-coins-table-wrapper {
     width: 100%;
-    overflow: auto;
+    overflow-x: auto;
 }
 
 .portfolio-coins-table,
 .portfolio-coins-table tbody {
-    display: block;
+    display: table;
     width: 100%;
     white-space: nowrap;
 }
