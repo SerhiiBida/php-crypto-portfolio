@@ -69,6 +69,23 @@ class Users
         }
     }
 
+    public function getAllIds(): ?array
+    {
+        try {
+            $sql = 'SELECT `id` FROM `users`';
+
+            $stmt = $this->pdo->query($sql);
+
+            // FETCH_ASSOC - вернуть как ассоциативный массив
+            return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return null;
+        }
+    }
+
     public function getByUsername(string $username): ?array
     {
         try {

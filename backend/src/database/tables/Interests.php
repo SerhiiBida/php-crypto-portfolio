@@ -37,6 +37,23 @@ class Interests implements TableInterface
         }
     }
 
+    public function getAllIds(): ?array
+    {
+        try {
+            $sql = 'SELECT `id` FROM `interests`';
+
+            $stmt = $this->pdo->query($sql);
+
+            // FETCH_ASSOC - вернуть как ассоциативный массив
+            return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return null;
+        }
+    }
+
     public function getExistingIds(array $ids): ?array
     {
         try {

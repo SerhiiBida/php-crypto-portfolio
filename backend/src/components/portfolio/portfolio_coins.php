@@ -222,7 +222,7 @@ $isPagination = pagination();
         </table>
     </div>
     <!--Пагинация-->
-    <?php if ($isPagination): ?>
+    <?php if ($isPagination && $totalPages > 1): ?>
         <div class="portfolio-coins-pagination">
             <a
                     href="<?php echo prevPageLink(); ?>"

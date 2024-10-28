@@ -22,6 +22,25 @@ class Coins implements TableInterface
         );
     ';
 
+    public function add(string $name, string $symbol, string $price): ?int
+    {
+        try {
+            $sql = 'INSERT INTO `coins` (`name`, `symbol`, `price`) VALUES (?, ?, ?)';
+
+            $sth = $this->pdo->prepare($sql);
+
+            $sth->execute([$name, $symbol, $price]);
+
+            // id последней вставленной записи
+            return (int)$this->pdo->lastInsertId();
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return null;
+        }
+    }
+
     public function getAll(): ?array
     {
         try {
@@ -31,6 +50,23 @@ class Coins implements TableInterface
 
             // FETCH_ASSOC - вернуть как ассоциативные массивы
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        } catch (\PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+
+            return null;
+        }
+    }
+
+    public function getAllIds(): ?array
+    {
+        try {
+            $sql = 'SELECT `id` FROM `coins`';
+
+            $stmt = $this->pdo->query($sql);
+
+            // FETCH_ASSOC - вернуть как ассоциативный массив
+            return $stmt->fetchAll(\PDO::FETCH_COLUMN);
 
         } catch (\PDOException $e) {
             echo 'Error: ' . $e->getMessage();
