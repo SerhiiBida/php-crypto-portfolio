@@ -2,7 +2,7 @@
 require '../../settings.php';
 
 // Обработчик формы
-require __DIR__ . '/../components/auth/register_handler.php';
+require __DIR__ . '/../components/auth/handlers/register_handler.php';
 
 // HEAD
 require '../layouts/head.php';
@@ -32,7 +32,7 @@ require '../layouts/header.php';
         </p>
 
         <?php
-        require '../components/auth/register_form.php';
+        require '../components/auth/forms/register_form.php';
         ?>
 
         <p class="register-bottom-text">

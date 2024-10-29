@@ -1,6 +1,6 @@
 <?php
 
-use App\components\auth\Auth;
+use App\auth\Auth;
 use App\validators\auth\AuthValidator;
 use App\validators\GlobalValidator;
 

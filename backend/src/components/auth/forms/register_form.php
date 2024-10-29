@@ -5,9 +5,9 @@ use App\database\tables\Interests;
 use App\database\tables\Languages;
 
 // Отображение ошибок и старых данных
-require __DIR__ . '/../../utils/form/display_data.php';
-require __DIR__ . '/../../utils/form/display_errors.php';
-require __DIR__ . '/display_auth_errors.php';
+require __DIR__ . '/../../../utils/form/display_data.php';
+require __DIR__ . '/../../../utils/form/display_errors.php';
+require __DIR__ . '/../display_auth_errors.php';
 
 // Данные для select и т.д.
 $countriesTable = new Countries();

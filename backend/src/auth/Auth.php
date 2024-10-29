@@ -1,6 +1,6 @@
 <?php
 
-namespace App\components\auth;
+namespace App\auth;
 
 use App\database\tables\UserInterest;
 use App\database\tables\UserLanguage;
@@ -164,6 +164,7 @@ class Auth
             setcookie('userId', '', $time, '/');
             setcookie('username', '', $time, '/');
             setcookie('email', '', $time, '/');
+            setcookie('token', '', $time, '/');
 
             // Завершаем и очищаем сессию
             session_destroy();

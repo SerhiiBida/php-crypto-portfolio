@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../../settings.php';
 
-use App\components\auth\Auth;
+use App\auth\Auth;
 
 
 if (isset($_COOKIE['auth'])) {

@@ -2,7 +2,7 @@
 require __DIR__ . '/../../settings.php';
 
 // Обработка формы
-require __DIR__ . '/../components/auth/login_handler.php';
+require __DIR__ . '/../components/auth/handlers/login_handler.php';
 
 // HEAD
 require __DIR__ . '/../layouts/head.php';
@@ -32,7 +32,7 @@ require __DIR__ . '/../layouts/header.php';
         </p>
 
         <?php
-        require __DIR__ . '/../components/auth/login_form.php';
+        require __DIR__ . '/../components/auth/forms/login_form.php';
         ?>
 
         <p class="login-bottom-text">

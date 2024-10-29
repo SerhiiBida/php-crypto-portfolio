@@ -1,7 +1,7 @@
 <?php
 
+use App\auth\Auth;
 use App\database\tables\Users;
-use App\components\auth\Auth;
 
 // Если авторизован, то создаем сессию
 if (isset($_COOKIE['auth']) && isset($_COOKIE['PHPSESSID'])) {

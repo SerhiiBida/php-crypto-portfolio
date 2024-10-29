@@ -1,8 +1,8 @@
 <?php
 // Отображение ошибок и старых данных
-require __DIR__ . '/../../utils/form/display_data.php';
-require __DIR__ . '/../../utils/form/display_errors.php';
-require __DIR__ . '/display_auth_errors.php';
+require __DIR__ . '/../../../utils/form/display_data.php';
+require __DIR__ . '/../../../utils/form/display_errors.php';
+require __DIR__ . '/../display_auth_errors.php';
 ?>
 <!--action - на текущую страницу-->
 <form
