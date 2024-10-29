@@ -1,7 +1,7 @@
 <?php
 // Отображение ошибок и старых данных
-require_once __DIR__ . '/../../utils/form/display_data.php';
-require_once __DIR__ . '/../../utils/form/display_errors.php';
+require_once __DIR__ . '/../../../utils/form/display_data.php';
+require_once __DIR__ . '/../../../utils/form/display_errors.php';
 ?>
 <form
         action="<?php echo $_SERVER['PHP_SELF'] ?>"

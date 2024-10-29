@@ -4,9 +4,9 @@ use App\database\tables\Portfolios;
 
 require '../../settings.php';
 // Обработка формы изменения портфеля
-require __DIR__ . '/../components/portfolios/change_portfolio_handler.php';
+require __DIR__ . '/../components/portfolios/handlers/change_portfolio_handler.php';
 // Обработка формы добавления портфеля
-require __DIR__ . '/../components/portfolios/add_portfolio_handler.php';
+require __DIR__ . '/../components/portfolios/handlers/add_portfolio_handler.php';
 // HEAD
 require '../layouts/head.php';
 ?>
@@ -49,7 +49,7 @@ require '../layouts/header.php';
                         $portfolioId = $portfolio['id'];
                         $portfolioName = $portfolio['name'];
 
-                        require __DIR__ . '/../components/portfolios/change_portfolio_form.php';
+                        require __DIR__ . '/../components/portfolios/forms/change_portfolio_form.php';
                     }
                     ?>
                 </div>
@@ -62,7 +62,7 @@ require '../layouts/header.php';
             <?php
             // Форма добавления
             if (count($portfolios) < 6) {
-                require __DIR__ . '/../components/portfolios/add_portfolio_form.php';
+                require __DIR__ . '/../components/portfolios/forms/add_portfolio_form.php';
             }
             ?>
         </div>
