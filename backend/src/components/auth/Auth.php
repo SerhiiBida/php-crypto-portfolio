@@ -42,9 +42,11 @@ class Auth
     {
         $sessionTime = (int)getenv('SESSION_TIME');
 
-        setcookie('auth', 'true', time() + $sessionTime, '/');
-        setcookie('userId', $userId, time() + $sessionTime, '/');
-        setcookie('username', $username, time() + $sessionTime, '/');
+        $time = time() + $sessionTime;
+
+        setcookie('auth', 'true', $time, '/');
+        setcookie('userId', $userId, $time, '/');
+        setcookie('username', $username, $time, '/');
     }
 
     public static function createSessionUser(int $userId, string $username): void
@@ -155,11 +157,13 @@ class Auth
     public static function logout(): void
     {
         if (isset($_COOKIE['auth'])) {
+            $time = time() - 3600;
+
             // Очищаем куки
-            setcookie('auth', '', time() - 3600, '/');
-            setcookie('userId', '', time() - 3600, '/');
-            setcookie('username', '', time() - 3600, '/');
-            setcookie('email', '', time() - 3600, '/');
+            setcookie('auth', '', $time, '/');
+            setcookie('userId', '', $time, '/');
+            setcookie('username', '', $time, '/');
+            setcookie('email', '', $time, '/');
 
             // Завершаем и очищаем сессию
             session_destroy();
