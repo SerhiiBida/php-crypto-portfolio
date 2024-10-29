@@ -147,9 +147,7 @@ class Users
     {
         try {
             $sql = '
-                UPDATE `users`
-                SET `token` = :token
-                WHERE `id` = :userId
+                UPDATE `users` SET `token` = :token WHERE `id` = :userId
             ';
 
             $sth = $this->pdo->prepare($sql);

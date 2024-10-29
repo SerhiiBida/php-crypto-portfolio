@@ -41,9 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $validator = new GlobalValidator($rawData, $authValidator);
 
-    $check = $validator->validate();
-
-    if ($check) {
+    if ($validator->validate()) {
         // Готовим данные
         $data = [];
 
@@ -51,11 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data['password'] = trim($_POST['password']);
 
         // Запомнить ли пользователя
-        if (isset($_POST['terms']) && $_POST['terms'] == 'on') {
-            $rememberMe = true;
-        } else {
-            $rememberMe = false;
-        }
+        $rememberMe = isset($_POST['terms']) && $_POST['terms'] === 'on';
 
         // Авторизовываем пользователя
         $check = Auth::login($data, $formErrors, $rememberMe);

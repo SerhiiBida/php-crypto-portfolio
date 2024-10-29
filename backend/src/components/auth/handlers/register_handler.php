@@ -4,6 +4,20 @@ use App\auth\Auth;
 use App\validators\auth\AuthValidator;
 use App\validators\GlobalValidator;
 
+function getDataForm(): array
+{
+    return [
+        'username' => trim($_POST['username']),
+        'email' => trim($_POST['email']),
+        'password' => password_hash(trim($_POST['password']), PASSWORD_DEFAULT),
+        'birthday' => trim($_POST['birthday']),
+        'salary' => floatval($_POST['salary']),
+        'yearsExperience' => intval($_POST['years-experience']),
+        'countryId' => intval($_POST['country']),
+        'gender' => trim($_POST['gender']),
+        'profilePicture' => file_get_contents($_FILES['profile-picture']['tmp_name'])
+    ];
+}
 
 // Храним ошибки
 $formErrors = [];
@@ -64,21 +78,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $validator = new GlobalValidator($rawData, $authValidator);
 
-    $check = $validator->validate();
-
-    if ($check) {
+    if ($validator->validate()) {
         // Готовим данные
-        $data = [];
-
-        $data['username'] = trim($_POST['username']);
-        $data['email'] = trim($_POST['email']);
-        $data['password'] = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
-        $data['birthday'] = trim($_POST['birthday']);
-        $data['salary'] = floatval($_POST['salary']);
-        $data['yearsExperience'] = intval($_POST['years-experience']);
-        $data['countryId'] = intval($_POST['country']);
-        $data['gender'] = trim($_POST['gender']);
-        $data['profilePicture'] = file_get_contents($_FILES['profile-picture']['tmp_name']);
+        $data = getDataForm();
 
         // Регистрируем пользователя
         $check = Auth::register($data, $formErrors);

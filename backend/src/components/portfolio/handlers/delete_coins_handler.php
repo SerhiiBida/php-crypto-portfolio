@@ -16,9 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete-coins-form'])) 
     // Валидация
     $validator = new GlobalValidator($rawData);
 
-    $check = $validator->validate();
-
-    if ($check) {
+    if ($validator->validate()) {
         $portfolioId = intval(trim($_GET['page-id']));
         $userId = $_SESSION['userId'];
         $coinId = intval(trim($_POST['coin-id']));

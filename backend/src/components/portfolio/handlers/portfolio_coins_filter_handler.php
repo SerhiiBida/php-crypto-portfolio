@@ -24,9 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['portfolio-coins-filte
     // Валидация
     $validator = new GlobalValidator($rawData);
 
-    $check = $validator->validate();
-
-    if ($check) {
+    if ($validator->validate()) {
         // Сохраняем настройки фильтрации, сортировки, поиска
         $filterPrice = $_SESSION['portfolio']['filterPrice'] = trim($_POST['filter-price']);
         $sort = $_SESSION['portfolio']['sort'] = trim($_POST['sort']);

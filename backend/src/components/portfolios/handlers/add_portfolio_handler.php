@@ -19,9 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-portfolio-form']))
     // Валидация
     $validator = new GlobalValidator($rawData);
 
-    $check = $validator->validate();
-
-    if ($check) {
+    if ($validator->validate()) {
         // Дополнительная валидация
         if (strlen($_POST['name']) < 6 || strlen($_POST['name']) > 18) {
             $_SESSION['formErrors']['name'] = 'The required length is from 6 to 18';

@@ -31,9 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-coin-form'])) {
     // Валидация
     $validator = new GlobalValidator($rawData, $addCoinValidator);
 
-    $check = $validator->validate();
-
-    if ($check) {
+    if ($validator->validate()) {
         $coinId = intval(trim($_POST['coin']));
         $portfolioId = intval(trim($_GET['page-id']));
         $coinsAmount = trim($_POST['amount']);

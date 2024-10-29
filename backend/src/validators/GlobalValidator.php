@@ -2,8 +2,7 @@
 
 namespace App\validators;
 
-use App\validators\abstraction\GlobalValidatorAbstract;
-use App\validators\interfaces\AdditionalValidatorInterface;
+use App\validators\abstraction\AbstractValidator;
 use App\validators\types\ArrayIntValidator;
 use App\validators\types\BoolValidator;
 use App\validators\types\DateValidator;
@@ -13,7 +12,7 @@ use App\validators\types\IntegerValidator;
 use App\validators\types\StringValidator;
 
 
-class GlobalValidator extends GlobalValidatorAbstract
+class GlobalValidator extends AbstractValidator
 {
     /**
      * Главный класс для запуска валидации
@@ -25,20 +24,15 @@ class GlobalValidator extends GlobalValidatorAbstract
      * @AdditionalValidatorInterface $additionalValidator - дополнительный валидатор,
      *  например, для аутентификации, основанный на интерфейсе AdditionalValidatorInterface
      */
-    public array $errors = [];
-
-    public function __construct(private array $fields, public ?AdditionalValidatorInterface $additionalValidator = null)
-    {
-
-    }
-
-    // Поля в которых не найдено ошибок(1 поле = 1 ошибка в $errors)
-    private function getCorrectFields(): array
-    {
-        return array_filter($this->fields, function ($key) {
-            return !array_key_exists($key, $this->errors);
-        }, ARRAY_FILTER_USE_KEY);
-    }
+    private array $validators = [
+        'str' => StringValidator::class,
+        'int' => IntegerValidator::class,
+        'float' => FloatValidator::class,
+        'bool' => BoolValidator::class,
+        'array-int' => ArrayIntValidator::class,
+        'date' => DateValidator::class,
+        'file' => FileValidator::class,
+    ];
 
     public function validate(): bool
     {
@@ -46,35 +40,18 @@ class GlobalValidator extends GlobalValidatorAbstract
 
         // Основная валидация
         foreach ($this->fields as $fieldName => $data) {
-            if ($data['type'] === 'str') {
-                $peculiarity = $data['peculiarity'] ?? null;
+            $type = $data['type'];
+            $peculiarity = $data['peculiarity'] ?? null;
+            $value = $data['value'];
 
-                $check = !StringValidator::validate($fieldName, $data['value'], $this->errors, $peculiarity) ? false : $check;
-            }
+            $validatorClass = $this->validators[$type];
 
-            if ($data['type'] === 'int') {
-                $check = !IntegerValidator::validate($fieldName, $data['value'], $this->errors) ? false : $check;
-            }
+            // Проверка
+            $isValid = ($type === 'str')
+                ? $validatorClass::validate($fieldName, $value, $this->errors, $peculiarity)
+                : $validatorClass::validate($fieldName, $value, $this->errors);
 
-            if ($data['type'] === 'float') {
-                $check = !FloatValidator::validate($fieldName, $data['value'], $this->errors) ? false : $check;
-            }
-
-            if ($data['type'] === 'bool') {
-                $check = !BoolValidator::validate($fieldName, $data['value'], $this->errors) ? false : $check;
-            }
-
-            if ($data['type'] === 'array-int') {
-                $check = !ArrayIntValidator::validate($fieldName, $data['value'], $this->errors) ? false : $check;
-            }
-
-            if ($data['type'] === 'date') {
-                $check = !DateValidator::validate($fieldName, $data['value'], $this->errors) ? false : $check;
-            }
-
-            if ($data['type'] === 'file') {
-                $check = !FileValidator::validate($fieldName, $data['value'], $this->errors) ? false : $check;
-            }
+            $check = !$isValid ? false : $check;
         }
 
         // Запуск дополнительной валидации

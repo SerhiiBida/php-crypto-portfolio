@@ -36,11 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && checkSubmitDynamicForm('change-portf
         ]
     ];
 
-    // Валидация
-    $validator = new GlobalValidator($rawData);
-
-    $check = $validator->validate();
-
     // Нет ошибок c id, даем возможность удалить
     if (!isset($_SESSION['formErrors']['id']) && isset($_POST['submit-button']) && $_POST['submit-button'] === 'delete') {
         $id = intval($_POST['portfolio-id']);
@@ -52,8 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && checkSubmitDynamicForm('change-portf
         }
     }
 
+    // Валидация
+    $validator = new GlobalValidator($rawData);
+
     // Глобальная проверка
-    if ($check) {
+    if ($validator->validate()) {
         // Дополнительная валидация
         if (strlen($_POST['name']) < 6 || strlen($_POST['name']) > 18) {
             $_SESSION['formErrors']['name'] = 'The required length is from 6 to 18';
