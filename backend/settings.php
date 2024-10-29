@@ -1,6 +1,6 @@
 <?php
 
-// Установка времени сохранения сессии и куки
+// Установка времени сохранения сессии и в куках PHPSESSID
 ini_set('session.gc_maxlifetime', (int)getenv('SESSION_TIME')); // 2 дня
 ini_set('session.cookie_lifetime', (int)getenv('SESSION_TIME'));
 
@@ -10,5 +10,5 @@ require_once __DIR__ . '/vendor/autoload.php';
 // Проверки авторизации для сессии и сохранения данных
 require_once __DIR__ . '/src/auth/check_authorization.php';
 
-// Проверка прав доступа
+// Проверка прав доступа(маршрутизатор)
 require_once __DIR__ . '/src/router/router.php';
