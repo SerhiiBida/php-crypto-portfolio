@@ -3,8 +3,8 @@
 // Отображение ошибок и старых данных
 use App\database\tables\Coins;
 
-require_once __DIR__ . '/../../utils/form/display_data.php';
-require_once __DIR__ . '/../../utils/form/display_errors.php';
+require_once __DIR__ . '/../../../utils/form/display_data.php';
+require_once __DIR__ . '/../../../utils/form/display_errors.php';
 
 // Данные для выбора монет
 $coinsObj = new Coins();

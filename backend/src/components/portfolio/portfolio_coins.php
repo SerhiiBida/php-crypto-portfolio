@@ -3,9 +3,9 @@
 use App\database\tables\CoinPortfolio;
 
 // Удаление монеты
-require_once __DIR__ . "/delete_coins_handler.php";
+require_once __DIR__ . "/handlers/delete_coins_handler.php";
 // Обработчик формы фильтрации, сортировки, поиска
-require_once __DIR__ . '/portfolio_coins_filter_handler.php';
+require_once __DIR__ . '/handlers/portfolio_coins_filter_handler.php';
 
 $coinPortfolio = new CoinPortfolio();
 
@@ -155,7 +155,7 @@ $isPagination = pagination();
                 Assets
             </h2>
         </div>
-        <?php require_once __DIR__ . '/portfolio_coins_filter_form.php'; ?>
+        <?php require_once __DIR__ . '/forms/portfolio_coins_filter_form.php'; ?>
     </div>
     <div class="portfolio-coins-table-wrapper">
         <table class="portfolio-coins-table">
@@ -207,7 +207,7 @@ $isPagination = pagination();
                     <td>
                         <!--Форма удаления монеты-->
 
-                        <?php require __DIR__ . '/delete_coins_form.php'; ?>
+                        <?php require __DIR__ . '/forms/delete_coins_form.php'; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
