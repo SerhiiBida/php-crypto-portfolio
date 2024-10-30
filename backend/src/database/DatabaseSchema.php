@@ -2,9 +2,12 @@
 
 namespace App\database;
 
+use App\database\tables\CoinPortfolio;
+use App\database\tables\Coins;
 use App\database\tables\Countries;
 use App\database\tables\Interests;
 use App\database\tables\Languages;
+use App\database\tables\Portfolios;
 use App\database\tables\UserInterest;
 use App\database\tables\UserLanguage;
 use App\database\tables\Users;
@@ -30,6 +33,9 @@ class DatabaseSchema
             UserLanguage::$table,
             Interests::$table,
             UserInterest::$table,
+            Coins::$table,
+            Portfolios::$table,
+            CoinPortfolio::$table,
         ];
 
         // Запуск конструктора ConnectTrait
